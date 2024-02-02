@@ -1,2 +1,7 @@
-# flutterflow_Supabase
-This flutterflow project is connected Supabase.
+# serviceapp2
+
+A new Flutter project.
+
+## Getting Started
+
+FlutterFlow projects are built to run on the Flutter _stable_ release.
