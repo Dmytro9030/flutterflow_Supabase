@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>778096646436-i7kgqv4kmq6q4i3r1a2lh1ignv18teir.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.778096646436-i7kgqv4kmq6q4i3r1a2lh1ignv18teir</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>778096646436-kh0rhh6k206ovf7eqsev4sf0ptuutib0.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBgr3qGFKUWLeS8NYNBLusddg4I3PLSPzI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>778096646436</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.safeblu.serviceapp</string>
+	<key>PROJECT_ID</key>
+	<string>safe-blu-service-app-fyo7o6</string>
+	<key>STORAGE_BUCKET</key>
+	<string>safe-blu-service-app-fyo7o6.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:778096646436:ios:5e899cdfcce319362dfbb1</string>
+</dict>
+</plist>
