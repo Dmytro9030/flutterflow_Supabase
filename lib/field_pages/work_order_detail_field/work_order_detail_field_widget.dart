@@ -8,9 +8,11 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'work_order_detail_field_model.dart';
 export 'work_order_detail_field_model.dart';
 
@@ -18,9 +20,11 @@ class WorkOrderDetailFieldWidget extends StatefulWidget {
   const WorkOrderDetailFieldWidget({
     super.key,
     required this.workOrder,
+    required this.customerID,
   });
 
   final int? workOrder;
+  final int? customerID;
 
   @override
   State<WorkOrderDetailFieldWidget> createState() =>
@@ -37,6 +41,35 @@ class _WorkOrderDetailFieldWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => WorkOrderDetailFieldModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultCustomerDetail = await FindCustomerInfoCall.call(
+        id: widget.customerID,
+      );
+      if ((_model.apiResultCustomerDetail?.succeeded ?? true)) {
+        setState(() {
+          _model.customerDetail = getJsonField(
+            (_model.apiResultCustomerDetail?.jsonBody ?? ''),
+            r'''$[0]''',
+          );
+        });
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              content: Text(_model.customerDetail!.toString()),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: const Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -105,7 +138,13 @@ class _WorkOrderDetailFieldWidgetState
               backgroundColor: FlutterFlowTheme.of(context).primary,
               automaticallyImplyLeading: false,
               title: Text(
-                'Company - Work Order ${widget.workOrder?.toString()}',
+                '${getJsonField(
+                      _model.customerDetail,
+                      r'''$.Company''',
+                    ) == null ? '' : getJsonField(
+                    _model.customerDetail,
+                    r'''$.Company''',
+                  ).toString()}- Work Order ${widget.workOrder?.toString()}',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,
@@ -152,10 +191,54 @@ class _WorkOrderDetailFieldWidgetState
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'CONTACT\nPHONE\nEMAIL',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            getJsonField(
+                                                      _model.customerDetail,
+                                                      r'''$.CONTACT''',
+                                                    ) ==
+                                                    null
+                                                ? ''
+                                                : getJsonField(
+                                                    _model.customerDetail,
+                                                    r'''$.CONTACT''',
+                                                  ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Text(
+                                            getJsonField(
+                                                      _model.customerDetail,
+                                                      r'''$["Phone #"]''',
+                                                    ) ==
+                                                    null
+                                                ? ''
+                                                : getJsonField(
+                                                    _model.customerDetail,
+                                                    r'''$["Phone #"]''',
+                                                  ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Text(
+                                            getJsonField(
+                                                      _model.customerDetail,
+                                                      r'''$.Email''',
+                                                    ) ==
+                                                    null
+                                                ? ''
+                                                : getJsonField(
+                                                    _model.customerDetail,
+                                                    r'''$.Email''',
+                                                  ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ],
                                       ),
                                       FlutterFlowIconButton(
                                         borderColor:
@@ -172,8 +255,14 @@ class _WorkOrderDetailFieldWidgetState
                                               .primaryText,
                                           size: 24.0,
                                         ),
-                                        onPressed: () {
-                                          print('IconButton pressed ...');
+                                        onPressed: () async {
+                                          await launchUrl(Uri(
+                                            scheme: 'tel',
+                                            path: getJsonField(
+                                              _model.customerDetail,
+                                              r'''$["Phone #"]''',
+                                            ).toString(),
+                                          ));
                                         },
                                       ),
                                     ],
@@ -187,10 +276,41 @@ class _WorkOrderDetailFieldWidgetState
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'Address\nAddress\nAddress\nAddress',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            getJsonField(
+                                                      _model.customerDetail,
+                                                      r'''$["Service Location Address"]''',
+                                                    ) ==
+                                                    null
+                                                ? ''
+                                                : getJsonField(
+                                                    _model.customerDetail,
+                                                    r'''$["Service Location Address"]''',
+                                                  ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Text(
+                                            'Address',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Text(
+                                            'Address',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Text(
+                                            'Address',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ],
                                       ),
                                       FlutterFlowIconButton(
                                         borderColor:
@@ -207,8 +327,11 @@ class _WorkOrderDetailFieldWidgetState
                                               .primaryText,
                                           size: 24.0,
                                         ),
-                                        onPressed: () {
-                                          print('IconButton pressed ...');
+                                        onPressed: () async {
+                                          await launchURL(getJsonField(
+                                            _model.customerDetail,
+                                            r'''$["Service Location Address"]''',
+                                          ).toString());
                                         },
                                       ),
                                     ],
@@ -475,6 +598,9 @@ class _WorkOrderDetailFieldWidgetState
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
+                                            ),
+                                            prefixIcon: const Icon(
+                                              Icons.search_sharp,
                                             ),
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -756,7 +882,7 @@ class _WorkOrderDetailFieldWidgetState
                                             autofocus: true,
                                             obscureText: false,
                                             decoration: InputDecoration(
-                                              labelText: 'Label here...',
+                                              labelText: 'Search',
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium,
@@ -805,6 +931,9 @@ class _WorkOrderDetailFieldWidgetState
                                                 ),
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
+                                              ),
+                                              prefixIcon: const Icon(
+                                                Icons.search,
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)

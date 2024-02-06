@@ -154,6 +154,31 @@ class FindEqptIDCall {
   }
 }
 
+class FindCustomerInfoCall {
+  static Future<ApiCallResponse> call({
+    int? id,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'findCustomerInfo',
+      apiUrl:
+          'https://qlefaywtxbyejnlapehf.supabase.co/rest/v1/customers?id=eq.$id',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsZWZheXd0eGJ5ZWpubGFwZWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ0MDcyMzUsImV4cCI6MjAxOTk4MzIzNX0.kSaSQ-_ikrCxp4iDXh7yGf11TpvdmKhttD7-Li3Wsk4',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsZWZheXd0eGJ5ZWpubGFwZWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ0MDcyMzUsImV4cCI6MjAxOTk4MzIzNX0.kSaSQ-_ikrCxp4iDXh7yGf11TpvdmKhttD7-Li3Wsk4',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

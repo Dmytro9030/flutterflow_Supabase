@@ -588,6 +588,10 @@ class _WorkOrderCheckListWidgetState extends State<WorkOrderCheckListWidget> {
                         _model.workOrderCreated?.id,
                         ParamType.int,
                       ),
+                      'customerID': serializeParam(
+                        widget.customerID,
+                        ParamType.int,
+                      ),
                     }.withoutNulls,
                   );
 

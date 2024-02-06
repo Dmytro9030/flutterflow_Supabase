@@ -50,6 +50,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/workOrderDetailField',
           builder: (context, params) => WorkOrderDetailFieldWidget(
             workOrder: params.getParam('workOrder', ParamType.int),
+            customerID: params.getParam('customerID', ParamType.int),
           ),
         ),
         FFRoute(

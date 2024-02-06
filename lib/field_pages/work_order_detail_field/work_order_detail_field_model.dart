@@ -11,10 +11,14 @@ class WorkOrderDetailFieldModel
 
   String? visibleData;
 
+  dynamic customerDetail;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
+  // Stores action output result for [Backend Call - API (findCustomerInfo)] action in workOrderDetailField widget.
+  ApiCallResponse? apiResultCustomerDetail;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;

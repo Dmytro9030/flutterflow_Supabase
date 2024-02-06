@@ -58,3 +58,16 @@ bool containingFunction(
   }
   return false;
 }
+
+int getIndexOfcustomerFunction(
+  List<CustomersRow> customerList,
+  int id,
+) {
+  var result = 0;
+  customerList.asMap().forEach((index, value) {
+    if (value.id == id) {
+      result = index;
+    }
+  });
+  return result;
+}
