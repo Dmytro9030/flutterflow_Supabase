@@ -8,6 +8,8 @@ class NewEquipmentModel extends FlutterFlowModel<NewEquipmentWidget> {
 
   int? extinguisherCatalogId;
 
+  int? serial;
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for DropDown widget.

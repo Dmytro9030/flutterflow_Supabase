@@ -97,7 +97,9 @@ class EquipmentRow extends SupabaseDataRow {
   String? get loanerSn => getField<String>('loaner_sn');
   set loanerSn(String? value) => setField<String>('loaner_sn', value);
 
-  String? get extinguisherDetails => getField<String>('extinguisherDetails');
-  set extinguisherDetails(String? value) =>
-      setField<String>('extinguisherDetails', value);
+  String? get details => getField<String>('details');
+  set details(String? value) => setField<String>('details', value);
+
+  String? get photoUrl => getField<String>('photo_url');
+  set photoUrl(String? value) => setField<String>('photo_url', value);
 }

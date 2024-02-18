@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'empty_widget_widget.dart' show EmptyWidgetWidget;
+import 'f_e_not_found_widget.dart' show FENotFoundWidget;
 import 'package:flutter/material.dart';
 
-class EmptyWidgetModel extends FlutterFlowModel<EmptyWidgetWidget> {
+class FENotFoundModel extends FlutterFlowModel<FENotFoundWidget> {
   /// Initialization and disposal methods.
 
   @override

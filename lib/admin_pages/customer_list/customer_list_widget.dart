@@ -77,6 +77,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
+            primary: false,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -103,7 +104,6 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                   child: TextFormField(
                                     controller: _model.textController,
                                     focusNode: _model.textFieldFocusNode,
-                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Company',
@@ -180,22 +180,67 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.apiResultetj =
+                                        await SearchCompaniesCall.call(
+                                      searchString: _model.textController.text,
+                                    );
+                                    if ((_model.apiResultetj?.succeeded ??
+                                        true)) {
+                                      setState(() {
+                                        _model.isSearchOn = true;
+                                      });
+                                    }
+
+                                    setState(() {});
+                                  },
+                                  text: 'Search',
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                              ),
                               FFButtonWidget(
                                 onPressed: () async {
-                                  _model.apiResultetj =
-                                      await SearchCompaniesCall.call(
-                                    searchString: _model.textController.text,
+                                  _model.newCustomer =
+                                      await CustomersTable().insert({
+                                    'notes': 'New Customer ',
+                                  });
+
+                                  context.pushNamed(
+                                    'customerDetail',
+                                    queryParameters: {
+                                      'customerPageId': serializeParam(
+                                        _model.newCustomer?.id,
+                                        ParamType.int,
+                                      ),
+                                    }.withoutNulls,
                                   );
-                                  if ((_model.apiResultetj?.succeeded ??
-                                      true)) {
-                                    setState(() {
-                                      _model.isSearchOn = true;
-                                    });
-                                  }
 
                                   setState(() {});
                                 },
-                                text: 'Search',
+                                text: 'New',
                                 options: FFButtonOptions(
                                   height: 40.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(

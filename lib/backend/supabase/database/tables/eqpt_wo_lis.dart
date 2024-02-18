@@ -28,4 +28,13 @@ class EqptWoLisRow extends SupabaseDataRow {
 
   int? get wo => getField<int>('wo');
   set wo(int? value) => setField<int>('wo', value);
+
+  String? get notes => getField<String>('notes');
+  set notes(String? value) => setField<String>('notes', value);
+
+  String? get items => getField<String>('items');
+  set items(String? value) => setField<String>('items', value);
+
+  String? get details => getField<String>('details');
+  set details(String? value) => setField<String>('details', value);
 }

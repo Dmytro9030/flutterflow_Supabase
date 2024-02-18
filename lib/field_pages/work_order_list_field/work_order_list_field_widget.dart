@@ -158,7 +158,7 @@ class _WorkOrderListFieldWidgetState extends State<WorkOrderListFieldWidget> {
                                                   ),
                                                   'customerID': serializeParam(
                                                     workOrderListFieldCustomersRowList[
-                                                            functions.getIndexOfcustomerFunction(
+                                                            functions.getIndexOfCustomerFunc(
                                                                 workOrderListFieldCustomersRowList
                                                                     .toList(),
                                                                 listViewWorkOrdersRow
@@ -171,14 +171,14 @@ class _WorkOrderListFieldWidgetState extends State<WorkOrderListFieldWidget> {
                                             },
                                             child: Text(
                                               valueOrDefault<String>(
-                                                workOrderListFieldCustomersRowList[functions.getIndexOfcustomerFunction(
+                                                workOrderListFieldCustomersRowList[functions.getIndexOfCustomerFunc(
                                                                     workOrderListFieldCustomersRowList
                                                                         .toList(),
                                                                     listViewWorkOrdersRow
                                                                         .customer!)]
                                                                 .company ==
                                                             null ||
-                                                        workOrderListFieldCustomersRowList[functions.getIndexOfcustomerFunction(
+                                                        workOrderListFieldCustomersRowList[functions.getIndexOfCustomerFunc(
                                                                     workOrderListFieldCustomersRowList
                                                                         .toList(),
                                                                     listViewWorkOrdersRow
@@ -187,7 +187,7 @@ class _WorkOrderListFieldWidgetState extends State<WorkOrderListFieldWidget> {
                                                             ''
                                                     ? ''
                                                     : workOrderListFieldCustomersRowList[
-                                                            functions.getIndexOfcustomerFunction(
+                                                            functions.getIndexOfCustomerFunc(
                                                                 workOrderListFieldCustomersRowList
                                                                     .toList(),
                                                                 listViewWorkOrdersRow

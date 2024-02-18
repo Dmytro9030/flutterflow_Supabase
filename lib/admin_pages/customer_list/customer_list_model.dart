@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'customer_list_widget.dart' show CustomerListWidget;
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class CustomerListModel extends FlutterFlowModel<CustomerListWidget> {
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Backend Call - API (searchCompanies)] action in Button widget.
   ApiCallResponse? apiResultetj;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  CustomersRow? newCustomer;
 
   /// Initialization and disposal methods.
 

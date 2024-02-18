@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'work_order_detail_field_widget.dart' show WorkOrderDetailFieldWidget;
 import 'package:flutter/material.dart';
 
@@ -11,25 +12,54 @@ class WorkOrderDetailFieldModel
 
   String? visibleData;
 
-  dynamic customerDetail;
+  DateTime? startTime;
+
+  DateTime? endTime;
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // Stores action output result for [Backend Call - API (findCustomerInfo)] action in workOrderDetailField widget.
-  ApiCallResponse? apiResultCustomerDetail;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
+  // State field(s) for contactTF widget.
+  FocusNode? contactTFFocusNode;
+  TextEditingController? contactTFController;
+  String? Function(BuildContext, String?)? contactTFControllerValidator;
+  // State field(s) for phoneTF widget.
+  FocusNode? phoneTFFocusNode;
+  TextEditingController? phoneTFController;
+  String? Function(BuildContext, String?)? phoneTFControllerValidator;
+  // State field(s) for emailTF widget.
+  FocusNode? emailTFFocusNode;
+  TextEditingController? emailTFController;
+  String? Function(BuildContext, String?)? emailTFControllerValidator;
+  // State field(s) for addressTF widget.
+  FocusNode? addressTFFocusNode;
+  TextEditingController? addressTFController;
+  String? Function(BuildContext, String?)? addressTFControllerValidator;
+  // State field(s) for UserDD widget.
+  String? userDDValue;
+  FormFieldController<String>? userDDValueController;
+  DateTime? datePicked1;
+  DateTime? datePicked2;
+  DateTime? datePicked3;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
+  TextEditingController? textController6;
+  String? Function(BuildContext, String?)? textController6Validator;
   var feSerial = '';
   // Stores action output result for [Backend Call - API (findEqptID)] action in Button widget.
   ApiCallResponse? apiResultEqpt;
   // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  FocusNode? textFieldFocusNode3;
+  TextEditingController? textController7;
+  String? Function(BuildContext, String?)? textController7Validator;
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
 
   /// Initialization and disposal methods.
 
@@ -42,8 +72,23 @@ class WorkOrderDetailFieldModel
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
+    contactTFFocusNode?.dispose();
+    contactTFController?.dispose();
+
+    phoneTFFocusNode?.dispose();
+    phoneTFController?.dispose();
+
+    emailTFFocusNode?.dispose();
+    emailTFController?.dispose();
+
+    addressTFFocusNode?.dispose();
+    addressTFController?.dispose();
+
     textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    textController6?.dispose();
+
+    textFieldFocusNode3?.dispose();
+    textController7?.dispose();
   }
 
   /// Action blocks are added here.

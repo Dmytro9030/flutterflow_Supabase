@@ -98,15 +98,16 @@ class CustomersRow extends SupabaseDataRow {
   set suppressionSystems(int? value) =>
       setField<int>('suppressionSystems', value);
 
-  DateTime get nextFixedGas => getField<DateTime>('nextFixedGas')!;
-  set nextFixedGas(DateTime value) => setField<DateTime>('nextFixedGas', value);
+  DateTime? get nextFixedGas => getField<DateTime>('nextFixedGas');
+  set nextFixedGas(DateTime? value) =>
+      setField<DateTime>('nextFixedGas', value);
 
-  DateTime get nextScba => getField<DateTime>('nextScba')!;
-  set nextScba(DateTime value) => setField<DateTime>('nextScba', value);
+  DateTime? get nextScba => getField<DateTime>('nextScba');
+  set nextScba(DateTime? value) => setField<DateTime>('nextScba', value);
 
-  DateTime get nextSuppressionSystems =>
-      getField<DateTime>('nextSuppressionSystems')!;
-  set nextSuppressionSystems(DateTime value) =>
+  DateTime? get nextSuppressionSystems =>
+      getField<DateTime>('nextSuppressionSystems');
+  set nextSuppressionSystems(DateTime? value) =>
       setField<DateTime>('nextSuppressionSystems', value);
 
   DateTime? get nextFallArrest => getField<DateTime>('nextFallArrest');
@@ -129,8 +130,8 @@ class CustomersRow extends SupabaseDataRow {
   set nextEmergencyLights(DateTime? value) =>
       setField<DateTime>('nextEmergencyLights', value);
 
-  DateTime get nextFirstAidKits => getField<DateTime>('nextFirstAidKits')!;
-  set nextFirstAidKits(DateTime value) =>
+  DateTime? get nextFirstAidKits => getField<DateTime>('nextFirstAidKits');
+  set nextFirstAidKits(DateTime? value) =>
       setField<DateTime>('nextFirstAidKits', value);
 
   DateTime? get nextAeds => getField<DateTime>('nextAeds');
@@ -140,9 +141,9 @@ class CustomersRow extends SupabaseDataRow {
   set nextFireHoses(DateTime? value) =>
       setField<DateTime>('nextFireHoses', value);
 
-  DateTime get nextFireExtinguishers =>
-      getField<DateTime>('nextFireExtinguishers')!;
-  set nextFireExtinguishers(DateTime value) =>
+  DateTime? get nextFireExtinguishers =>
+      getField<DateTime>('nextFireExtinguishers');
+  set nextFireExtinguishers(DateTime? value) =>
       setField<DateTime>('nextFireExtinguishers', value);
 
   String? get billingContact => getField<String>('billingContact');
@@ -158,4 +159,10 @@ class CustomersRow extends SupabaseDataRow {
 
   String? get billingEmail => getField<String>('billingEmail');
   set billingEmail(String? value) => setField<String>('billingEmail', value);
+
+  int? get parentCompany => getField<int>('parentCompany');
+  set parentCompany(int? value) => setField<int>('parentCompany', value);
+
+  int? get primeContractor => getField<int>('primeContractor');
+  set primeContractor(int? value) => setField<int>('primeContractor', value);
 }

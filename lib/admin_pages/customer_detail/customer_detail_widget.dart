@@ -1,5 +1,6 @@
 import '/admin_pages/work_order_check_list/work_order_check_list_widget.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/drop_down_widget.dart';
 import '/equipment_pages/new_equipment/new_equipment_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -50,6 +51,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
     _model.textFieldFocusNode8 ??= FocusNode();
 
     _model.textFieldFocusNode9 ??= FocusNode();
+
+    _model.textFieldFocusNode10 ??= FocusNode();
+
+    _model.textController11 ??= TextEditingController();
+    _model.textFieldFocusNode11 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -116,8 +122,8 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
               automaticallyImplyLeading: false,
               title: Text(
                 valueOrDefault<String>(
-                  customerDetailCustomersRow?.name,
-                  'Company',
+                  widget.customerPageId?.toString(),
+                  '1',
                 ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
@@ -151,6 +157,111 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                   children: [
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 8.0, 10.0),
+                                            child: TextFormField(
+                                              controller:
+                                                  _model.textController1 ??=
+                                                      TextEditingController(
+                                                text: customerDetailCustomersRow
+                                                    ?.name,
+                                              ),
+                                              focusNode:
+                                                  _model.textFieldFocusNode1,
+                                              onFieldSubmitted: (_) async {
+                                                await CustomersTable().update(
+                                                  data: {
+                                                    'name': _model
+                                                        .textController1.text,
+                                                  },
+                                                  matchingRows: (rows) =>
+                                                      rows.eq(
+                                                    'id',
+                                                    widget.customerPageId,
+                                                  ),
+                                                );
+                                              },
+                                              autofocus: true,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                labelText: 'Company Name',
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium,
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium,
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                errorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 30.0,
+                                                      ),
+                                              validator: _model
+                                                  .textController1Validator
+                                                  .asValidator(context),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
@@ -174,108 +285,33 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                         8.0, 0.0, 8.0, 0.0),
                                                 child: TextFormField(
                                                   controller:
-                                                      _model.textController1 ??=
+                                                      _model.textController2 ??=
                                                           TextEditingController(
                                                     text:
                                                         customerDetailCustomersRow
                                                             ?.contact,
                                                   ),
                                                   focusNode: _model
-                                                      .textFieldFocusNode1,
-                                                  autofocus: true,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Label here...',
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium,
-                                                    hintStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium,
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    errorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                  validator: _model
-                                                      .textController1Validator
-                                                      .asValidator(context),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 200.0,
-                                              decoration: const BoxDecoration(),
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 8.0, 0.0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      _model.textController2 ??=
-                                                          TextEditingController(
-                                                    text: customerDetailCustomersRow
-                                                        ?.serviceLocationAddress,
-                                                  ),
-                                                  focusNode: _model
                                                       .textFieldFocusNode2,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'CONTACT': _model
+                                                            .textController2
+                                                            .text,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Label here...',
+                                                    labelText: 'Contact',
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -357,16 +393,32 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                   controller:
                                                       _model.textController3 ??=
                                                           TextEditingController(
-                                                    text:
-                                                        customerDetailCustomersRow
-                                                            ?.phone,
+                                                    text: customerDetailCustomersRow
+                                                        ?.serviceLocationAddress,
                                                   ),
                                                   focusNode: _model
                                                       .textFieldFocusNode3,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'Service Location Address':
+                                                            _model
+                                                                .textController3
+                                                                .text,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Label here...',
+                                                    labelText:
+                                                        'Service Location Address',
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -450,14 +502,27 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                           TextEditingController(
                                                     text:
                                                         customerDetailCustomersRow
-                                                            ?.email,
+                                                            ?.phone,
                                                   ),
                                                   focusNode: _model
                                                       .textFieldFocusNode4,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'Phone #': '',
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Label here...',
+                                                    labelText: 'Phone',
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -528,19 +593,6 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Billing:',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .displaySmall,
-                                            ),
                                             Container(
                                               width: 200.0,
                                               decoration: const BoxDecoration(),
@@ -554,14 +606,29 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                           TextEditingController(
                                                     text:
                                                         customerDetailCustomersRow
-                                                            ?.billingContact,
+                                                            ?.email,
                                                   ),
                                                   focusNode: _model
                                                       .textFieldFocusNode5,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'Email': _model
+                                                            .textController5
+                                                            .text,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Label here...',
+                                                    labelText: 'Email',
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -632,6 +699,19 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ),
                                               ),
                                             ),
+                                          ],
+                                        ),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Billing:',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .displaySmall,
+                                            ),
                                             Container(
                                               width: 200.0,
                                               decoration: const BoxDecoration(),
@@ -645,14 +725,30 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                           TextEditingController(
                                                     text:
                                                         customerDetailCustomersRow
-                                                            ?.billingAddress,
+                                                            ?.billingContact,
                                                   ),
                                                   focusNode: _model
                                                       .textFieldFocusNode6,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'billingContact': _model
+                                                            .textController6
+                                                            .text,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Label here...',
+                                                    labelText:
+                                                        'Billing Contact',
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -736,14 +832,30 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                           TextEditingController(
                                                     text:
                                                         customerDetailCustomersRow
-                                                            ?.billingPhone,
+                                                            ?.billingAddress,
                                                   ),
                                                   focusNode: _model
                                                       .textFieldFocusNode7,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'billingAddress': _model
+                                                            .textController7
+                                                            .text,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Label here...',
+                                                    labelText:
+                                                        'Billing Address',
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -827,14 +939,29 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                           TextEditingController(
                                                     text:
                                                         customerDetailCustomersRow
-                                                            ?.billingEmail,
+                                                            ?.billingPhone,
                                                   ),
                                                   focusNode: _model
                                                       .textFieldFocusNode8,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'billingPhone': _model
+                                                            .textController8
+                                                            .text,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Label here...',
+                                                    labelText: 'Billing Phone',
                                                     labelStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -905,6 +1032,112 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ),
                                               ),
                                             ),
+                                            Container(
+                                              width: 200.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 0.0, 8.0, 0.0),
+                                                child: TextFormField(
+                                                  controller:
+                                                      _model.textController9 ??=
+                                                          TextEditingController(
+                                                    text:
+                                                        customerDetailCustomersRow
+                                                            ?.billingEmail,
+                                                  ),
+                                                  focusNode: _model
+                                                      .textFieldFocusNode9,
+                                                  onFieldSubmitted: (_) async {
+                                                    await CustomersTable()
+                                                        .update(
+                                                      data: {
+                                                        'billingEmail': _model
+                                                            .textController9
+                                                            .text,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        widget.customerPageId,
+                                                      ),
+                                                    );
+                                                  },
+                                                  autofocus: true,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Billing  Email',
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium,
+                                                    hintStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium,
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    errorBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  validator: _model
+                                                      .textController9Validator
+                                                      .asValidator(context),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                         Column(
@@ -928,18 +1161,18 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                     .fromSTEB(
                                                         0.0, 0.0, 8.0, 0.0),
                                                 child: TextFormField(
-                                                  controller:
-                                                      _model.textController9 ??=
-                                                          TextEditingController(
+                                                  controller: _model
+                                                          .textController10 ??=
+                                                      TextEditingController(
                                                     text:
                                                         customerDetailCustomersRow
                                                             ?.notes,
                                                   ),
                                                   focusNode: _model
-                                                      .textFieldFocusNode9,
+                                                      .textFieldFocusNode10,
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
-                                                    '_model.textController9',
+                                                    '_model.textController10',
                                                     const Duration(
                                                         milliseconds: 2000),
                                                     () async {
@@ -947,7 +1180,7 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                           .update(
                                                         data: {
                                                           'notes': _model
-                                                              .textController9
+                                                              .textController10
                                                               .text,
                                                         },
                                                         matchingRows: (rows) =>
@@ -963,7 +1196,7 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                         .update(
                                                       data: {
                                                         'notes': _model
-                                                            .textController9
+                                                            .textController10
                                                             .text,
                                                       },
                                                       matchingRows: (rows) =>
@@ -1041,7 +1274,7 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                           context)
                                                       .bodyMedium,
                                                   validator: _model
-                                                      .textController9Validator
+                                                      .textController10Validator
                                                       .asValidator(context),
                                                 ),
                                               ),
@@ -1146,9 +1379,12 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                             VerticalDirection.down,
                                         clipBehavior: Clip.none,
                                         children: [
-                                          if (customerDetailCustomersRow!
-                                                  .fireExtinguishers! >
-                                              0)
+                                          if ((customerDetailCustomersRow!
+                                                      .fireExtinguishers! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .fireExtinguishers !=
+                                                  null))
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -1268,8 +1504,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ),
                                               ],
                                             ),
-                                          if (customerDetailCustomersRow.fireHoses! >
-                                              0)
+                                          if ((customerDetailCustomersRow.fireHoses! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .fireHoses !=
+                                                  null))
                                             Padding(
                                               padding: const EdgeInsets.all(10.0),
                                               child: Column(
@@ -1396,8 +1635,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ],
                                               ),
                                             ),
-                                          if (customerDetailCustomersRow.suppressionSystems! >
-                                              0)
+                                          if ((customerDetailCustomersRow.suppressionSystems! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .suppressionSystems !=
+                                                  null))
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
@@ -1518,8 +1760,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ),
                                               ],
                                             ),
-                                          if (customerDetailCustomersRow.emergencyLights! >
-                                              0)
+                                          if ((customerDetailCustomersRow.emergencyLights! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .emergencyLights !=
+                                                  null))
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
@@ -1646,8 +1891,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ),
                                               ],
                                             ),
-                                          if (customerDetailCustomersRow.firstAidKits! >
-                                              0)
+                                          if ((customerDetailCustomersRow.firstAidKits! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .firstAidKits !=
+                                                  null))
                                             Padding(
                                               padding: const EdgeInsets.all(10.0),
                                               child: Column(
@@ -1782,8 +2030,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ],
                                               ),
                                             ),
-                                          if (customerDetailCustomersRow.aeds! >
-                                              0)
+                                          if ((customerDetailCustomersRow.aeds! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .aeds !=
+                                                  null))
                                             Padding(
                                               padding: const EdgeInsets.all(10.0),
                                               child: Column(
@@ -1918,8 +2169,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ],
                                               ),
                                             ),
-                                          if (customerDetailCustomersRow.eyeWash! >
-                                              0)
+                                          if ((customerDetailCustomersRow.eyeWash! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .eyeWash !=
+                                                  null))
                                             Padding(
                                               padding: const EdgeInsets.all(10.0),
                                               child: Column(
@@ -2054,8 +2308,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ],
                                               ),
                                             ),
-                                          if (customerDetailCustomersRow.fixedGas! >
-                                              0)
+                                          if ((customerDetailCustomersRow.scba! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .scba !=
+                                                  null))
                                             Padding(
                                               padding: const EdgeInsets.all(10.0),
                                               child: Column(
@@ -2190,8 +2447,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ],
                                               ),
                                             ),
-                                          if (customerDetailCustomersRow.scba! >
-                                              0)
+                                          if ((customerDetailCustomersRow.fixedGas! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .fixedGas !=
+                                                  null))
                                             Padding(
                                               padding: const EdgeInsets.all(10.0),
                                               child: Column(
@@ -2326,8 +2586,11 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                                 ],
                                               ),
                                             ),
-                                          if (customerDetailCustomersRow.fallArrest! >
-                                              0)
+                                          if ((customerDetailCustomersRow.fallArrest! >
+                                                  0) &&
+                                              (customerDetailCustomersRow
+                                                      .fallArrest !=
+                                                  null))
                                             Padding(
                                               padding: const EdgeInsets.all(10.0),
                                               child: Column(
@@ -2470,119 +2733,6 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Comments (coming soon)',
-                                style:
-                                    FlutterFlowTheme.of(context).displaySmall,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    FutureBuilder<List<CommentsRow>>(
-                                      future: CommentsTable().queryRows(
-                                        queryFn: (q) => q.eq(
-                                          'customer',
-                                          widget.customerPageId,
-                                        ),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<CommentsRow> rowCommentsRowList =
-                                            snapshot.data!;
-                                        return Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: List.generate(
-                                              rowCommentsRowList.length,
-                                              (rowIndex) {
-                                            final rowCommentsRow =
-                                                rowCommentsRowList[rowIndex];
-                                            return Card(
-                                              clipBehavior:
-                                                  Clip.antiAliasWithSaveLayer,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              elevation: 4.0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  rowCommentsRow.comment,
-                                                  'blank',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                              ),
-                                            );
-                                          }),
-                                        );
-                                      },
-                                    ),
-                                    FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: 'Add New Comment',
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: Colors.white,
-                                            ),
-                                        elevation: 3.0,
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
@@ -2644,6 +2794,307 @@ class _CustomerDetailWidgetState extends State<CustomerDetailWidget> {
                                 ),
                               ],
                             ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 10.0),
+                                child: Text(
+                                  'Comments ',
+                                  style:
+                                      FlutterFlowTheme.of(context).displaySmall,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        FutureBuilder<List<CommentsRow>>(
+                                          future: CommentsTable().queryRows(
+                                            queryFn: (q) => q
+                                                .eq(
+                                                  'customer',
+                                                  widget.customerPageId,
+                                                )
+                                                .neq(
+                                                  'status',
+                                                  'Closed',
+                                                ),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<CommentsRow>
+                                                rowCommentsRowList =
+                                                snapshot.data!;
+                                            return Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  rowCommentsRowList.length,
+                                                  (rowIndex) {
+                                                final rowCommentsRow =
+                                                    rowCommentsRowList[
+                                                        rowIndex];
+                                                return Card(
+                                                  clipBehavior: Clip
+                                                      .antiAliasWithSaveLayer,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  elevation: 4.0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(
+                                                            20.0),
+                                                        child: Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            rowCommentsRow
+                                                                .comment,
+                                                            'blank',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium,
+                                                        ),
+                                                      ),
+                                                      DropDownWidget(
+                                                        key: Key(
+                                                            'Keyvpz_${rowIndex}_of_${rowCommentsRowList.length}'),
+                                                        status: rowCommentsRow
+                                                            .status,
+                                                        customerId: widget
+                                                            .customerPageId,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              }),
+                                            );
+                                          },
+                                        ),
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(-1.0, 1.0),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  0.3,
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xCCE8E8E8),
+                                                border: Border.all(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(20.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8.0,
+                                                                  0.0,
+                                                                  8.0,
+                                                                  10.0),
+                                                      child: TextFormField(
+                                                        controller: _model
+                                                            .textController11,
+                                                        focusNode: _model
+                                                            .textFieldFocusNode11,
+                                                        autofocus: true,
+                                                        obscureText: false,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText:
+                                                              'Comment Text',
+                                                          labelStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium,
+                                                          hintStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium,
+                                                          enabledBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .alternate,
+                                                              width: 2.0,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                          focusedBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              width: 2.0,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                          errorBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .error,
+                                                              width: 2.0,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .error,
+                                                              width: 2.0,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                        validator: _model
+                                                            .textController11Validator
+                                                            .asValidator(
+                                                                context),
+                                                      ),
+                                                    ),
+                                                    FFButtonWidget(
+                                                      onPressed: () async {
+                                                        await CommentsTable()
+                                                            .insert({
+                                                          'customer': widget
+                                                              .customerPageId,
+                                                          'comment': _model
+                                                              .textController11
+                                                              .text,
+                                                        });
+                                                      },
+                                                      text: 'Add New Comment',
+                                                      options: FFButtonOptions(
+                                                        height: 40.0,
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    24.0,
+                                                                    0.0,
+                                                                    24.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                        elevation: 3.0,
+                                                        borderSide: const BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

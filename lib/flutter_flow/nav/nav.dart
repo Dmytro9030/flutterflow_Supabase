@@ -56,18 +56,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'customerDetail',
           path: '/customer',
-          builder: (context, params) => CustomerDetailWidget(
-            customerPageId: params.getParam('customerPageId', ParamType.int),
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: CustomerDetailWidget(
+              customerPageId: params.getParam('customerPageId', ParamType.int),
+            ),
           ),
         ),
         FFRoute(
           name: 'editWo',
           path: '/editWo',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'editWo')
-              : EditWoWidget(
-                  woTime: params.getParam('woTime', ParamType.String),
-                ),
+          builder: (context, params) => EditWoWidget(
+            woTime: params.getParam('woTime', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'customerList',
@@ -117,11 +118,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'fieldItemPage',
-          path: '/fieldItemPage',
-          builder: (context, params) => FieldItemPageWidget(
-            orderID: params.getParam('orderID', ParamType.int),
-            eqptID: params.getParam('eqptID', ParamType.int),
+          name: 'WOListShop',
+          path: '/wOListShop',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'WOListShop')
+              : const WOListShopWidget(),
+        ),
+        FFRoute(
+          name: 'WODetailShop',
+          path: '/wODetailShop',
+          builder: (context, params) => WODetailShopWidget(
+            workOrder: params.getParam('workOrder', ParamType.int),
+            customerID: params.getParam('customerID', ParamType.int),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

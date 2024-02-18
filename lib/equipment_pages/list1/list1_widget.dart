@@ -1,5 +1,6 @@
 import '/backend/supabase/supabase.dart';
-import '/components/edit_row_widget.dart';
+import '/common_components/edit_row/edit_row_widget.dart';
+import '/common_components/mass_edit_date_dialog/mass_edit_date_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -238,7 +239,7 @@ class _List1WidgetState extends State<List1Widget> {
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    dataTableEquipmentRow.extinguisherDetails,
+                                    dataTableEquipmentRow.description,
                                     'Details',
                                   ),
                                   style:
@@ -252,29 +253,134 @@ class _List1WidgetState extends State<List1Widget> {
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    dataTableEquipmentRow.nextDue1?.toString(),
-                                    'Date',
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: MassEditDateDialogWidget(
+                                              eqptType:
+                                                  dataTableEquipmentRow.type,
+                                              field: 'inspectionDate1',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      dateTimeFormat('yMd',
+                                          dataTableEquipmentRow.nextDue1),
+                                      'Date',
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    dataTableEquipmentRow.nextDue2?.toString(),
-                                    'Date',
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: MassEditDateDialogWidget(
+                                              eqptType:
+                                                  dataTableEquipmentRow.type,
+                                              field: 'inspectionDate2',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      dateTimeFormat('yMd',
+                                          dataTableEquipmentRow.nextDue2),
+                                      'Date',
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    dataTableEquipmentRow.nextDue3?.toString(),
-                                    'Serial',
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: MassEditDateDialogWidget(
+                                              eqptType:
+                                                  dataTableEquipmentRow.type,
+                                              field: 'inspectionDate3',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      dateTimeFormat('yMd',
+                                          dataTableEquipmentRow.nextDue3),
+                                      'Serial',
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                                 Text(
                                   valueOrDefault<String>(

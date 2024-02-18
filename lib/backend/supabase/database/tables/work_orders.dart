@@ -27,9 +27,6 @@ class WorkOrdersRow extends SupabaseDataRow {
   String? get woNum => getField<String>('woNum');
   set woNum(String? value) => setField<String>('woNum', value);
 
-  int? get eqptLis => getField<int>('eqptLis');
-  set eqptLis(int? value) => setField<int>('eqptLis', value);
-
   int? get itemLis => getField<int>('itemLis');
   set itemLis(int? value) => setField<int>('itemLis', value);
 
@@ -60,7 +57,4 @@ class WorkOrdersRow extends SupabaseDataRow {
 
   bool? get estimateNeeded => getField<bool>('estimateNeeded');
   set estimateNeeded(bool? value) => setField<bool>('estimateNeeded', value);
-
-  String? get location => getField<String>('location');
-  set location(String? value) => setField<String>('location', value);
 }
