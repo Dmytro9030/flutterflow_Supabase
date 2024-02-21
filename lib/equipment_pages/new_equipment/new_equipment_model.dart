@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'new_equipment_widget.dart' show NewEquipmentWidget;
@@ -44,6 +45,8 @@ class NewEquipmentModel extends FlutterFlowModel<NewEquipmentWidget> {
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  EquipmentRow? newEqpt;
 
   /// Initialization and disposal methods.
 

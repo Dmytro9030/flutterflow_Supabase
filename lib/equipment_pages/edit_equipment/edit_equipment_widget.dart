@@ -61,6 +61,10 @@ class _EditEquipmentWidgetState extends State<EditEquipmentWidget> {
     context.watch<FFAppState>();
 
     return Container(
+      constraints: const BoxConstraints(
+        maxWidth: 650.0,
+        maxHeight: 750.0,
+      ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),

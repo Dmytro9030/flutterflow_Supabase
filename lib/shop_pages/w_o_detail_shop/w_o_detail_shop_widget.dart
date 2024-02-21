@@ -585,6 +585,147 @@ class _WODetailShopWidgetState extends State<WODetailShopWidget> {
                                   ),
                                 ),
                               ),
+                              Material(
+                                color: Colors.transparent,
+                                elevation: 5.0,
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 200.0,
+                                  constraints: const BoxConstraints(
+                                    minHeight: 100.0,
+                                    maxHeight: 800.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 0.0, 10.0, 0.0),
+                                    child: FutureBuilder<List<EqptWoLisRow>>(
+                                      future: EqptWoLisTable().queryRows(
+                                        queryFn: (q) => q
+                                            .eq(
+                                              'wo',
+                                              widget.workOrder,
+                                            )
+                                            .eq(
+                                              'Status',
+                                              'To Shop',
+                                            ),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<EqptWoLisRow>
+                                            listViewEqptWoLisRowList =
+                                            snapshot.data!;
+                                        return ListView.builder(
+                                          padding: EdgeInsets.zero,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              listViewEqptWoLisRowList.length,
+                                          itemBuilder:
+                                              (context, listViewIndex) {
+                                            final listViewEqptWoLisRow =
+                                                listViewEqptWoLisRowList[
+                                                    listViewIndex];
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child:
+                                                            ExtinguisherDetailWidget(
+                                                          eqptLisID: functions
+                                                              .geteqptWoLisIDFunction(
+                                                                  wODetailShopEqptWoLisRowList
+                                                                      .toList(),
+                                                                  listViewEqptWoLisRow
+                                                                      .id),
+                                                          eqptID:
+                                                              listViewEqptWoLisRow
+                                                                  .id,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              child: ListTile(
+                                                title: Text(
+                                                  'Description',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge,
+                                                ),
+                                                subtitle: Text(
+                                                  'SERIAL - nextDue1 - nextDue 2 - nextDue 3',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelMedium,
+                                                ),
+                                                trailing: Icon(
+                                                  Icons.check_box_outline_blank,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 20.0,
+                                                ),
+                                                tileColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                dense: false,
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           Row(

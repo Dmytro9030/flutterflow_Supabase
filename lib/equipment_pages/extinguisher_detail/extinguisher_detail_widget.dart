@@ -1,4 +1,5 @@
 import '/backend/supabase/supabase.dart';
+import '/equipment_pages/to_shop_popup/to_shop_popup_widget.dart';
 import '/field_pages/field_item/field_item_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -69,6 +70,10 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: MediaQuery.sizeOf(context).height * 1.0,
+      constraints: const BoxConstraints(
+        maxWidth: 600.0,
+        maxHeight: 1100.0,
+      ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
@@ -370,6 +375,49 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                                 iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: const Color(0xFFEF3939),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: Colors.white,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 20.0, 0.0, 0.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: ToShopPopupWidget(
+                                        eqptWoLi: widget.eqptLisID!,
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              text: 'To Shop',
+                              options: FFButtonOptions(
+                                height: 40.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).warning,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
@@ -799,7 +847,7 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                     scrollDirection: Axis.vertical,
                     children: [
                       SwitchListTile.adaptive(
-                        value: _model.switchListTileValue1 ??= false,
+                        value: _model.switchListTileValue1 ??= true,
                         onChanged: (newValue) async {
                           setState(
                               () => _model.switchListTileValue1 = newValue);
@@ -820,7 +868,7 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                         controlAffinity: ListTileControlAffinity.trailing,
                       ),
                       SwitchListTile.adaptive(
-                        value: _model.switchListTileValue2 ??= false,
+                        value: _model.switchListTileValue2 ??= true,
                         onChanged: (newValue) async {
                           setState(
                               () => _model.switchListTileValue2 = newValue);
@@ -841,7 +889,7 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                         controlAffinity: ListTileControlAffinity.trailing,
                       ),
                       SwitchListTile.adaptive(
-                        value: _model.switchListTileValue3 ??= false,
+                        value: _model.switchListTileValue3 ??= true,
                         onChanged: (newValue) async {
                           setState(
                               () => _model.switchListTileValue3 = newValue);
@@ -862,7 +910,7 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                         controlAffinity: ListTileControlAffinity.trailing,
                       ),
                       SwitchListTile.adaptive(
-                        value: _model.switchListTileValue4 ??= false,
+                        value: _model.switchListTileValue4 ??= true,
                         onChanged: (newValue) async {
                           setState(
                               () => _model.switchListTileValue4 = newValue);
@@ -883,7 +931,7 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                         controlAffinity: ListTileControlAffinity.trailing,
                       ),
                       SwitchListTile.adaptive(
-                        value: _model.switchListTileValue5 ??= false,
+                        value: _model.switchListTileValue5 ??= true,
                         onChanged: (newValue) async {
                           setState(
                               () => _model.switchListTileValue5 = newValue);
@@ -904,7 +952,7 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                         controlAffinity: ListTileControlAffinity.trailing,
                       ),
                       SwitchListTile.adaptive(
-                        value: _model.switchListTileValue6 ??= false,
+                        value: _model.switchListTileValue6 ??= true,
                         onChanged: (newValue) async {
                           setState(
                               () => _model.switchListTileValue6 = newValue);
@@ -928,7 +976,7 @@ class _ExtinguisherDetailWidgetState extends State<ExtinguisherDetailWidget> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                         child: SwitchListTile.adaptive(
-                          value: _model.switchListTileValue7 ??= false,
+                          value: _model.switchListTileValue7 ??= true,
                           onChanged: (newValue) async {
                             setState(
                                 () => _model.switchListTileValue7 = newValue);

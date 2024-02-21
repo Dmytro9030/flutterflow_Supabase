@@ -18,29 +18,53 @@ class ShopItemModel extends FlutterFlowModel<ShopItemWidget> {
 
   final formKey = GlobalKey<FormState>();
   // State field(s) for item1TF widget.
-  FocusNode? item1TFFocusNode;
-  TextEditingController? item1TFController;
-  String? Function(BuildContext, String?)? item1TFControllerValidator;
+  FocusNode? item1TFFocusNode1;
+  TextEditingController? item1TFController1;
+  String? Function(BuildContext, String?)? item1TFController1Validator;
   // State field(s) for item2TF widget.
-  FocusNode? item2TFFocusNode;
-  TextEditingController? item2TFController;
-  String? Function(BuildContext, String?)? item2TFControllerValidator;
+  FocusNode? item2TFFocusNode1;
+  TextEditingController? item2TFController1;
+  String? Function(BuildContext, String?)? item2TFController1Validator;
   // State field(s) for item3TF widget.
-  FocusNode? item3TFFocusNode;
-  TextEditingController? item3TFController;
-  String? Function(BuildContext, String?)? item3TFControllerValidator;
+  FocusNode? item3TFFocusNode1;
+  TextEditingController? item3TFController1;
+  String? Function(BuildContext, String?)? item3TFController1Validator;
   // State field(s) for item4TF widget.
-  FocusNode? item4TFFocusNode;
-  TextEditingController? item4TFController;
-  String? Function(BuildContext, String?)? item4TFControllerValidator;
+  FocusNode? item4TFFocusNode1;
+  TextEditingController? item4TFController1;
+  String? Function(BuildContext, String?)? item4TFController1Validator;
   // State field(s) for item5TF widget.
-  FocusNode? item5TFFocusNode;
-  TextEditingController? item5TFController;
-  String? Function(BuildContext, String?)? item5TFControllerValidator;
+  FocusNode? item5TFFocusNode1;
+  TextEditingController? item5TFController1;
+  String? Function(BuildContext, String?)? item5TFController1Validator;
   // State field(s) for item6TF widget.
-  FocusNode? item6TFFocusNode;
-  TextEditingController? item6TFController;
-  String? Function(BuildContext, String?)? item6TFControllerValidator;
+  FocusNode? item6TFFocusNode1;
+  TextEditingController? item6TFController1;
+  String? Function(BuildContext, String?)? item6TFController1Validator;
+  // State field(s) for item1TF widget.
+  FocusNode? item1TFFocusNode2;
+  TextEditingController? item1TFController2;
+  String? Function(BuildContext, String?)? item1TFController2Validator;
+  // State field(s) for item2TF widget.
+  FocusNode? item2TFFocusNode2;
+  TextEditingController? item2TFController2;
+  String? Function(BuildContext, String?)? item2TFController2Validator;
+  // State field(s) for item3TF widget.
+  FocusNode? item3TFFocusNode2;
+  TextEditingController? item3TFController2;
+  String? Function(BuildContext, String?)? item3TFController2Validator;
+  // State field(s) for item4TF widget.
+  FocusNode? item4TFFocusNode2;
+  TextEditingController? item4TFController2;
+  String? Function(BuildContext, String?)? item4TFController2Validator;
+  // State field(s) for item5TF widget.
+  FocusNode? item5TFFocusNode2;
+  TextEditingController? item5TFController2;
+  String? Function(BuildContext, String?)? item5TFController2Validator;
+  // State field(s) for item6TF widget.
+  FocusNode? item6TFFocusNode2;
+  TextEditingController? item6TFController2;
+  String? Function(BuildContext, String?)? item6TFController2Validator;
 
   /// Initialization and disposal methods.
 
@@ -49,23 +73,41 @@ class ShopItemModel extends FlutterFlowModel<ShopItemWidget> {
 
   @override
   void dispose() {
-    item1TFFocusNode?.dispose();
-    item1TFController?.dispose();
+    item1TFFocusNode1?.dispose();
+    item1TFController1?.dispose();
 
-    item2TFFocusNode?.dispose();
-    item2TFController?.dispose();
+    item2TFFocusNode1?.dispose();
+    item2TFController1?.dispose();
 
-    item3TFFocusNode?.dispose();
-    item3TFController?.dispose();
+    item3TFFocusNode1?.dispose();
+    item3TFController1?.dispose();
 
-    item4TFFocusNode?.dispose();
-    item4TFController?.dispose();
+    item4TFFocusNode1?.dispose();
+    item4TFController1?.dispose();
 
-    item5TFFocusNode?.dispose();
-    item5TFController?.dispose();
+    item5TFFocusNode1?.dispose();
+    item5TFController1?.dispose();
 
-    item6TFFocusNode?.dispose();
-    item6TFController?.dispose();
+    item6TFFocusNode1?.dispose();
+    item6TFController1?.dispose();
+
+    item1TFFocusNode2?.dispose();
+    item1TFController2?.dispose();
+
+    item2TFFocusNode2?.dispose();
+    item2TFController2?.dispose();
+
+    item3TFFocusNode2?.dispose();
+    item3TFController2?.dispose();
+
+    item4TFFocusNode2?.dispose();
+    item4TFController2?.dispose();
+
+    item5TFFocusNode2?.dispose();
+    item5TFController2?.dispose();
+
+    item6TFFocusNode2?.dispose();
+    item6TFController2?.dispose();
   }
 
   /// Action blocks are added here.

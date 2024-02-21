@@ -68,6 +68,10 @@ class _EquipmentDetailWidgetState extends State<EquipmentDetailWidget> {
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: MediaQuery.sizeOf(context).height * 1.0,
+      constraints: const BoxConstraints(
+        maxWidth: 600.0,
+        maxHeight: 850.0,
+      ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),

@@ -52,6 +52,21 @@ bool subContainingFunc(
   return false;
 }
 
+String? geteqpWoListStateFunction(
+  List<EqptWoLisRow> eqptRow,
+  int eqptID,
+) {
+  String? result;
+  eqptRow.asMap().forEach(
+    (idx, value) {
+      if (value.eqpt == eqptID) {
+        result = value.status;
+      }
+    },
+  );
+  return result;
+}
+
 int getIndexOfCustomerFunc(
   List<CustomersRow> customerList,
   int id,

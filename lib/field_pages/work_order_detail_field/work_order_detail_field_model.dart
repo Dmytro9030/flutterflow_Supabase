@@ -50,6 +50,8 @@ class WorkOrderDetailFieldModel
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController6;
   String? Function(BuildContext, String?)? textController6Validator;
+  // State field(s) for showSwitch1 widget.
+  bool? showSwitch1Value;
   var feSerial = '';
   // Stores action output result for [Backend Call - API (findEqptID)] action in Button widget.
   ApiCallResponse? apiResultEqpt;
@@ -57,6 +59,8 @@ class WorkOrderDetailFieldModel
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController7;
   String? Function(BuildContext, String?)? textController7Validator;
+  // State field(s) for showSwitch2 widget.
+  bool? showSwitch2Value;
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;

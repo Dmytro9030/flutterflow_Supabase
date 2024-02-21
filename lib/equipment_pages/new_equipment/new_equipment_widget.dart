@@ -14,9 +14,11 @@ class NewEquipmentWidget extends StatefulWidget {
   const NewEquipmentWidget({
     super.key,
     required this.customerId,
+    this.workOrderId,
   });
 
   final int? customerId;
+  final int? workOrderId;
 
   @override
   State<NewEquipmentWidget> createState() => _NewEquipmentWidgetState();
@@ -61,6 +63,12 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
     context.watch<FFAppState>();
 
     return Container(
+      constraints: const BoxConstraints(
+        minWidth: 350.0,
+        minHeight: 700.0,
+        maxWidth: 600.0,
+        maxHeight: 700.0,
+      ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
@@ -1044,7 +1052,7 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
               children: [
                 FFButtonWidget(
                   onPressed: () async {
-                    await EquipmentTable().insert({
+                    _model.newEqpt = await EquipmentTable().insert({
                       'type': _model.dropDownValue1,
                       'customer': widget.customerId,
                       'inspectionDate1':
@@ -1063,7 +1071,15 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
                       'nextDue3': supaSerialize<DateTime>(_model.datePicked5),
                       'notes': _model.textController3.text,
                     });
+                    if (widget.workOrderId != null) {
+                      await EqptWoLisTable().insert({
+                        'wo': widget.workOrderId,
+                        'eqpt': _model.newEqpt?.id,
+                      });
+                    }
                     Navigator.pop(context);
+
+                    setState(() {});
                   },
                   text: 'Submit',
                   options: FFButtonOptions(

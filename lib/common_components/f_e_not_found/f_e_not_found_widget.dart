@@ -57,6 +57,7 @@ class _FENotFoundWidgetState extends State<FENotFoundWidget> {
           width: double.infinity,
           constraints: const BoxConstraints(
             maxWidth: 530.0,
+            maxHeight: 200.0,
           ),
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,

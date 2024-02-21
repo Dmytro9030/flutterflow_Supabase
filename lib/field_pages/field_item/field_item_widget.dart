@@ -44,6 +44,10 @@ class _FieldItemWidgetState extends State<FieldItemWidget> {
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: MediaQuery.sizeOf(context).height * 1.0,
+      constraints: const BoxConstraints(
+        maxWidth: 350.0,
+        maxHeight: 450.0,
+      ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),

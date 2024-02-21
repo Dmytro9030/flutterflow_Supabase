@@ -1,6 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
-import '/equipment_pages/equipment_detail/equipment_detail_widget.dart';
 import '/equipment_pages/extinguisher_detail/extinguisher_detail_widget.dart';
 import '/equipment_pages/new_equipment/new_equipment_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -1420,170 +1419,196 @@ class _WorkOrderDetailFieldWidgetState
                         },
                       ),
                     ),
-                    FutureBuilder<List<EqptWoLisRow>>(
-                      future: EqptWoLisTable().queryRows(
-                        queryFn: (q) => q.eq(
-                          'wo',
-                          widget.workOrder,
-                        ),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        List<EqptWoLisRow> formEqptWoLisRowList =
-                            snapshot.data!;
-                        return Form(
-                          key: _model.formKey,
-                          autovalidateMode: AutovalidateMode.disabled,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
+                    Form(
+                      key: _model.formKey,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Wrap(
+                            spacing: 0.0,
+                            runSpacing: 0.0,
+                            alignment: WrapAlignment.start,
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            direction: Axis.horizontal,
+                            runAlignment: WrapAlignment.start,
+                            verticalDirection: VerticalDirection.down,
+                            clipBehavior: Clip.none,
                             children: [
-                              Wrap(
-                                spacing: 0.0,
-                                runSpacing: 0.0,
-                                alignment: WrapAlignment.start,
-                                crossAxisAlignment: WrapCrossAlignment.start,
-                                direction: Axis.horizontal,
-                                runAlignment: WrapAlignment.start,
-                                verticalDirection: VerticalDirection.down,
-                                clipBehavior: Clip.none,
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 20.0, 0.0, 10.0),
-                                        child: Text(
-                                          'Extinguisher List:',
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                fontSize: 22.0,
-                                                fontWeight: FontWeight.w600,
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 20.0, 0.0, 10.0),
+                                    child: Text(
+                                      'Extinguisher List:',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 0.0),
+                                      child: SizedBox(
+                                        width: 200.0,
+                                        child: TextFormField(
+                                          controller: _model.textController6,
+                                          focusNode: _model.textFieldFocusNode2,
+                                          onChanged: (_) =>
+                                              EasyDebounce.debounce(
+                                            '_model.textController6',
+                                            const Duration(milliseconds: 2000),
+                                            () async {
+                                              setState(() {
+                                                _model.visibleData =
+                                                    _model.textController6.text;
+                                              });
+                                            },
+                                          ),
+                                          onFieldSubmitted: (_) async {
+                                            setState(() {
+                                              _model.visibleData =
+                                                  _model.textController6.text;
+                                            });
+                                          },
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: 'Search',
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium,
+                                            hintStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium,
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 2.0,
                                               ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            errorBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedErrorBorder:
+                                                UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            prefixIcon: const Icon(
+                                              Icons.search_sharp,
+                                            ),
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                          textAlign: TextAlign.start,
+                                          validator: _model
+                                              .textController6Validator
+                                              .asValidator(context),
                                         ),
                                       ),
-                                      Flexible(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  8.0, 0.0, 8.0, 0.0),
-                                          child: SizedBox(
-                                            width: 200.0,
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.textController6,
-                                              focusNode:
-                                                  _model.textFieldFocusNode2,
-                                              onChanged: (_) =>
-                                                  EasyDebounce.debounce(
-                                                '_model.textController6',
-                                                const Duration(milliseconds: 2000),
-                                                () async {
-                                                  setState(() {
-                                                    _model.visibleData = _model
-                                                        .textController6.text;
-                                                  });
-                                                },
-                                              ),
-                                              onFieldSubmitted: (_) async {
-                                                setState(() {
-                                                  _model.visibleData = _model
-                                                      .textController6.text;
-                                                });
-                                              },
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Search',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium,
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium,
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .alternate,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                errorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                prefixIcon: const Icon(
-                                                  Icons.search_sharp,
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                              textAlign: TextAlign.start,
-                                              validator: _model
-                                                  .textController6Validator
-                                                  .asValidator(context),
-                                            ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 10.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'Show Completed Items',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                        Switch.adaptive(
+                                          value: _model.showSwitch1Value ??=
+                                              false,
+                                          onChanged: (newValue) async {
+                                            setState(() => _model
+                                                .showSwitch1Value = newValue);
+                                          },
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .accent1,
+                                          inactiveTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          inactiveThumbColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryText,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              FutureBuilder<List<EqptWoLisRow>>(
+                                future: EqptWoLisTable().queryRows(
+                                  queryFn: (q) => q.eq(
+                                    'wo',
+                                    widget.workOrder,
+                                  ),
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Material(
+                                    );
+                                  }
+                                  List<EqptWoLisRow>
+                                      blankStatusEqptWoLisRowList =
+                                      snapshot.data!;
+                                  return Material(
                                     color: Colors.transparent,
                                     elevation: 5.0,
                                     child: Container(
@@ -1604,17 +1629,16 @@ class _WorkOrderDetailFieldWidgetState
                                             FutureBuilder<List<EquipmentRow>>(
                                           future: EquipmentTable().queryRows(
                                             queryFn: (q) => q
-                                                .eq(
-                                                  'type',
-                                                  'Fire Extinguisher',
-                                                )
                                                 .in_(
                                                   'id',
                                                   functions.getEqptIDFunction(
-                                                      formEqptWoLisRowList
+                                                      blankStatusEqptWoLisRowList
                                                           .toList()),
                                                 )
-                                                .order('soonestDate'),
+                                                .eq(
+                                                  'type',
+                                                  'Fire Extinguisher',
+                                                ),
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
@@ -1652,22 +1676,33 @@ class _WorkOrderDetailFieldWidgetState
                                                     listViewEquipmentRowList[
                                                         listViewIndex];
                                                 return Visibility(
-                                                  visible: (_model.visibleData ==
-                                                              null ||
-                                                          _model.visibleData ==
-                                                              '') ||
-                                                      functions.subContainingFunc(
-                                                          (listViewEquipmentRow
-                                                                  .description!)
-                                                              .toLowerCase(),
-                                                          (_model.visibleData!)
-                                                              .toLowerCase()) ||
-                                                      functions.subContainingFunc(
-                                                          (listViewEquipmentRow
-                                                                  .serial!)
-                                                              .toLowerCase(),
-                                                          (_model.visibleData!)
-                                                              .toLowerCase()),
+                                                  visible: (_model
+                                                              .showSwitch1Value! &&
+                                                          (functions.geteqpWoListStateFunction(
+                                                                      blankStatusEqptWoLisRowList
+                                                                          .toList(),
+                                                                      listViewEquipmentRow
+                                                                          .id) !=
+                                                                  null &&
+                                                              functions.geteqpWoListStateFunction(
+                                                                      blankStatusEqptWoLisRowList
+                                                                          .toList(),
+                                                                      listViewEquipmentRow
+                                                                          .id) !=
+                                                                  '')) ||
+                                                      (!_model.showSwitch1Value! &&
+                                                          (functions.geteqpWoListStateFunction(
+                                                                      blankStatusEqptWoLisRowList
+                                                                          .toList(),
+                                                                      listViewEquipmentRow
+                                                                          .id) ==
+                                                                  null ||
+                                                              functions.geteqpWoListStateFunction(
+                                                                      blankStatusEqptWoLisRowList
+                                                                          .toList(),
+                                                                      listViewEquipmentRow
+                                                                          .id) ==
+                                                                  '')),
                                                   child: InkWell(
                                                     splashColor:
                                                         Colors.transparent,
@@ -1705,7 +1740,7 @@ class _WorkOrderDetailFieldWidgetState
                                                               child:
                                                                   ExtinguisherDetailWidget(
                                                                 eqptLisID: functions.geteqptWoLisIDFunction(
-                                                                    formEqptWoLisRowList
+                                                                    blankStatusEqptWoLisRowList
                                                                         .toList(),
                                                                     listViewEquipmentRow
                                                                         .id),
@@ -1721,30 +1756,14 @@ class _WorkOrderDetailFieldWidgetState
                                                     },
                                                     child: ListTile(
                                                       title: Text(
-                                                        listViewEquipmentRow
-                                                                        .description ==
-                                                                    null ||
-                                                                listViewEquipmentRow
-                                                                        .description ==
-                                                                    ''
-                                                            ? ''
-                                                            : listViewEquipmentRow
-                                                                .description!,
+                                                        '${listViewEquipmentRow.description} - ${listViewEquipmentRow.serial}',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .bodyLarge,
                                                       ),
                                                       subtitle: Text(
-                                                        listViewEquipmentRow
-                                                                        .serial ==
-                                                                    null ||
-                                                                listViewEquipmentRow
-                                                                        .serial ==
-                                                                    ''
-                                                            ? ''
-                                                            : listViewEquipmentRow
-                                                                .serial!,
+                                                        '${dateTimeFormat('yMd', listViewEquipmentRow.nextDue1)} - ${dateTimeFormat('yMd', listViewEquipmentRow.nextDue2)} - ${dateTimeFormat('yMd', listViewEquipmentRow.nextDue3)}',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1772,47 +1791,566 @@ class _WorkOrderDetailFieldWidgetState
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
-                              Row(
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 10.0, 0.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.feSerial =
+                                        await FlutterBarcodeScanner.scanBarcode(
+                                      '#C62828', // scanning line color
+                                      'Cancel', // cancel button text
+                                      true, // whether to show the flash icon
+                                      ScanMode.BARCODE,
+                                    );
+
+                                    _model.apiResultEqpt =
+                                        await FindEqptIDCall.call(
+                                      serial: _model.feSerial,
+                                    );
+                                    if ((_model.apiResultEqpt?.succeeded ??
+                                        true)) {
+                                      setState(() {
+                                        _model.eqptID = getJsonField(
+                                          (_model.apiResultEqpt?.jsonBody ??
+                                              ''),
+                                          r'''$.id''',
+                                        );
+                                      });
+                                    }
+
+                                    setState(() {});
+                                  },
+                                  text: 'Scan Barcode',
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 30.0, 0.0, 0.0),
+                            child: Wrap(
+                              spacing: 0.0,
+                              runSpacing: 0.0,
+                              alignment: WrapAlignment.start,
+                              crossAxisAlignment: WrapCrossAlignment.start,
+                              direction: Axis.horizontal,
+                              runAlignment: WrapAlignment.start,
+                              verticalDirection: VerticalDirection.down,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 20.0, 0.0, 10.0),
+                                      child: Text(
+                                        'Equipment List:',
+                                        textAlign: TextAlign.start,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 22.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 8.0, 0.0),
+                                        child: SizedBox(
+                                          width: 200.0,
+                                          child: TextFormField(
+                                            controller: _model.textController7,
+                                            focusNode:
+                                                _model.textFieldFocusNode3,
+                                            autofocus: true,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText: 'Search',
+                                              labelStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium,
+                                              hintStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium,
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              errorBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              focusedErrorBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              prefixIcon: const Icon(
+                                                Icons.search,
+                                              ),
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                            validator: _model
+                                                .textController7Validator
+                                                .asValidator(context),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            'Show Completed Items',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Switch.adaptive(
+                                            value: _model.showSwitch2Value ??=
+                                                false,
+                                            onChanged: (newValue) async {
+                                              setState(() =>
+                                                  _model.showSwitch2Value =
+                                                      newValue);
+                                            },
+                                            activeColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            activeTrackColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .accent1,
+                                            inactiveTrackColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .alternate,
+                                            inactiveThumbColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryText,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                FutureBuilder<List<EqptWoLisRow>>(
+                                  future: EqptWoLisTable().queryRows(
+                                    queryFn: (q) => q.eq(
+                                      'wo',
+                                      widget.workOrder,
+                                    ),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<EqptWoLisRow>
+                                        blankStatusEqptWoLisRowList =
+                                        snapshot.data!;
+                                    return Material(
+                                      color: Colors.transparent,
+                                      elevation: 5.0,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 200.0,
+                                        constraints: const BoxConstraints(
+                                          minHeight: 100.0,
+                                          maxHeight: 800.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 10.0, 0.0),
+                                          child:
+                                              FutureBuilder<List<EquipmentRow>>(
+                                            future: EquipmentTable().queryRows(
+                                              queryFn: (q) => q
+                                                  .in_(
+                                                    'id',
+                                                    functions.getEqptIDFunction(
+                                                        blankStatusEqptWoLisRowList
+                                                            .toList()),
+                                                  )
+                                                  .neq(
+                                                    'type',
+                                                    'Fire Extinguisher',
+                                                  ),
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50.0,
+                                                    height: 50.0,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<EquipmentRow>
+                                                  listViewEquipmentRowList =
+                                                  snapshot.data!;
+                                              return ListView.builder(
+                                                padding: EdgeInsets.zero,
+                                                shrinkWrap: true,
+                                                scrollDirection: Axis.vertical,
+                                                itemCount:
+                                                    listViewEquipmentRowList
+                                                        .length,
+                                                itemBuilder:
+                                                    (context, listViewIndex) {
+                                                  final listViewEquipmentRow =
+                                                      listViewEquipmentRowList[
+                                                          listViewIndex];
+                                                  return Visibility(
+                                                    visible: (_model.showSwitch2Value! &&
+                                                            (functions.geteqpWoListStateFunction(
+                                                                        blankStatusEqptWoLisRowList
+                                                                            .toList(),
+                                                                        listViewEquipmentRow
+                                                                            .id) !=
+                                                                    null &&
+                                                                functions.geteqpWoListStateFunction(
+                                                                        blankStatusEqptWoLisRowList
+                                                                            .toList(),
+                                                                        listViewEquipmentRow
+                                                                            .id) !=
+                                                                    '')) ||
+                                                        (!_model.showSwitch2Value! &&
+                                                            (functions.geteqpWoListStateFunction(
+                                                                        blankStatusEqptWoLisRowList
+                                                                            .toList(),
+                                                                        listViewEquipmentRow
+                                                                            .id) ==
+                                                                    null ||
+                                                                functions.geteqpWoListStateFunction(
+                                                                        blankStatusEqptWoLisRowList
+                                                                            .toList(),
+                                                                        listViewEquipmentRow
+                                                                            .id) ==
+                                                                    '')),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return GestureDetector(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
+                                                                          context)
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
+                                                              child: Padding(
+                                                                padding: MediaQuery
+                                                                    .viewInsetsOf(
+                                                                        context),
+                                                                child:
+                                                                    ExtinguisherDetailWidget(
+                                                                  eqptLisID: functions.geteqptWoLisIDFunction(
+                                                                      blankStatusEqptWoLisRowList
+                                                                          .toList(),
+                                                                      listViewEquipmentRow
+                                                                          .id),
+                                                                  eqptID:
+                                                                      listViewEquipmentRow
+                                                                          .id,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      child: ListTile(
+                                                        title: Text(
+                                                          '${listViewEquipmentRow.description} - ${listViewEquipmentRow.serial}',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge,
+                                                        ),
+                                                        subtitle: Text(
+                                                          '${dateTimeFormat('yMd', listViewEquipmentRow.nextDue1)} - ${dateTimeFormat('yMd', listViewEquipmentRow.nextDue2)} - ${dateTimeFormat('yMd', listViewEquipmentRow.nextDue3)}',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium,
+                                                        ),
+                                                        trailing: Icon(
+                                                          Icons
+                                                              .check_box_outline_blank,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 20.0,
+                                                        ),
+                                                        tileColor: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        dense: false,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          FutureBuilder<List<WorkOrdersRow>>(
+                            future: WorkOrdersTable().querySingleRow(
+                              queryFn: (q) => q.eq(
+                                'id',
+                                widget.workOrder,
+                              ),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<WorkOrdersRow> rowWorkOrdersRowList =
+                                  snapshot.data!;
+                              final rowWorkOrdersRow =
+                                  rowWorkOrdersRowList.isNotEmpty
+                                      ? rowWorkOrdersRowList.first
+                                      : null;
+                              return Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: const NewEquipmentWidget(
+                                                customerId: 0,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+                                    },
+                                    text: 'Add Equipment',
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          24.0, 0.0, 24.0, 0.0),
+                                      iconPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: Colors.white,
+                                          ),
+                                      elevation: 3.0,
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  FlutterFlowDropDown<String>(
+                                    controller:
+                                        _model.dropDownValueController ??=
+                                            FormFieldController<String>(null),
+                                    options: const ['To Invoice', 'To Shop'],
+                                    onChanged: (val) => setState(
+                                        () => _model.dropDownValue = val),
+                                    width: 300.0,
+                                    height: 50.0,
+                                    textStyle:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    hintText: 'Please select...',
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    elevation: 2.0,
+                                    borderColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    borderWidth: 2.0,
+                                    borderRadius: 8.0,
+                                    margin: const EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 4.0, 16.0, 4.0),
+                                    hidesUnderline: true,
+                                    isOverButton: true,
+                                    isSearchable: false,
+                                    isMultiSelect: false,
+                                  ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 10.0, 0.0, 0.0),
+                                        20.0, 20.0, 20.0, 20.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        _model.feSerial =
-                                            await FlutterBarcodeScanner
-                                                .scanBarcode(
-                                          '#C62828', // scanning line color
-                                          'Cancel', // cancel button text
-                                          true, // whether to show the flash icon
-                                          ScanMode.BARCODE,
+                                        await WorkOrdersTable().update(
+                                          data: {
+                                            'status': _model.dropDownValue,
+                                          },
+                                          matchingRows: (rows) => rows.eq(
+                                            'id',
+                                            widget.workOrder,
+                                          ),
                                         );
 
-                                        _model.apiResultEqpt =
-                                            await FindEqptIDCall.call(
-                                          serial: _model.feSerial,
-                                        );
-                                        if ((_model.apiResultEqpt?.succeeded ??
-                                            true)) {
-                                          setState(() {
-                                            _model.eqptID = getJsonField(
-                                              (_model.apiResultEqpt?.jsonBody ??
-                                                  ''),
-                                              r'''$.id''',
-                                            );
-                                          });
-                                        }
-
-                                        setState(() {});
+                                        context.pushNamed('workOrderListField');
                                       },
-                                      text: 'Scan Barcode',
+                                      text: ' Inspection Completed',
                                       options: FFButtonOptions(
                                         height: 40.0,
                                         padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1823,11 +2361,7 @@ class _WorkOrderDetailFieldWidgetState
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
                                         textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: Colors.white,
-                                            ),
+                                            .titleMedium,
                                         elevation: 3.0,
                                         borderSide: const BorderSide(
                                           color: Colors.transparent,
@@ -1839,480 +2373,11 @@ class _WorkOrderDetailFieldWidgetState
                                     ),
                                   ),
                                 ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 0.0),
-                                child: Wrap(
-                                  spacing: 0.0,
-                                  runSpacing: 0.0,
-                                  alignment: WrapAlignment.start,
-                                  crossAxisAlignment: WrapCrossAlignment.start,
-                                  direction: Axis.horizontal,
-                                  runAlignment: WrapAlignment.start,
-                                  verticalDirection: VerticalDirection.down,
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 20.0, 0.0, 10.0),
-                                          child: Text(
-                                            'Equipment List:',
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontSize: 22.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                        ),
-                                        Flexible(
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 8.0, 0.0),
-                                            child: SizedBox(
-                                              width: 200.0,
-                                              child: TextFormField(
-                                                controller:
-                                                    _model.textController7,
-                                                focusNode:
-                                                    _model.textFieldFocusNode3,
-                                                autofocus: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: 'Search',
-                                                  labelStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMedium,
-                                                  hintStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelMedium,
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  errorBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  prefixIcon: const Icon(
-                                                    Icons.search,
-                                                  ),
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                                validator: _model
-                                                    .textController7Validator
-                                                    .asValidator(context),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 200.0,
-                                      constraints: const BoxConstraints(
-                                        minHeight: 100.0,
-                                        maxHeight: 800.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 10.0, 0.0),
-                                        child:
-                                            FutureBuilder<List<EquipmentRow>>(
-                                          future: EquipmentTable().queryRows(
-                                            queryFn: (q) => q
-                                                .neq(
-                                                  'type',
-                                                  'Fire Extinguisher',
-                                                )
-                                                .in_(
-                                                  'id',
-                                                  functions.getEqptIDFunction(
-                                                      formEqptWoLisRowList
-                                                          .toList()),
-                                                ),
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50.0,
-                                                  height: 50.0,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<
-                                                            Color>(
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            List<EquipmentRow>
-                                                listViewEquipmentRowList =
-                                                snapshot.data!;
-                                            return ListView.builder(
-                                              padding: EdgeInsets.zero,
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.vertical,
-                                              itemCount:
-                                                  listViewEquipmentRowList
-                                                      .length,
-                                              itemBuilder:
-                                                  (context, listViewIndex) {
-                                                final listViewEquipmentRow =
-                                                    listViewEquipmentRowList[
-                                                        listViewIndex];
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () => _model
-                                                                  .unfocusNode
-                                                                  .canRequestFocus
-                                                              ? FocusScope.of(
-                                                                      context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode)
-                                                              : FocusScope.of(
-                                                                      context)
-                                                                  .unfocus(),
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                EquipmentDetailWidget(
-                                                              eqptLisID: functions
-                                                                  .geteqptWoLisIDFunction(
-                                                                      formEqptWoLisRowList
-                                                                          .toList(),
-                                                                      listViewEquipmentRow
-                                                                          .id),
-                                                              eqptID:
-                                                                  listViewEquipmentRow
-                                                                      .id,
-                                                              eqpt:
-                                                                  listViewEquipmentRow
-                                                                      .type,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  child: ListTile(
-                                                    title: Text(
-                                                      listViewEquipmentRow
-                                                                      .description ==
-                                                                  null ||
-                                                              listViewEquipmentRow
-                                                                      .description ==
-                                                                  ''
-                                                          ? ''
-                                                          : listViewEquipmentRow
-                                                              .description!,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLarge,
-                                                    ),
-                                                    subtitle: Text(
-                                                      listViewEquipmentRow
-                                                                      .serial ==
-                                                                  null ||
-                                                              listViewEquipmentRow
-                                                                      .serial ==
-                                                                  ''
-                                                          ? ''
-                                                          : listViewEquipmentRow
-                                                              .serial!,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium,
-                                                    ),
-                                                    trailing: Icon(
-                                                      Icons
-                                                          .check_box_outline_blank,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      size: 20.0,
-                                                    ),
-                                                    tileColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
-                                                    dense: false,
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              FutureBuilder<List<WorkOrdersRow>>(
-                                future: WorkOrdersTable().querySingleRow(
-                                  queryFn: (q) => q.eq(
-                                    'id',
-                                    widget.workOrder,
-                                  ),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<WorkOrdersRow> rowWorkOrdersRowList =
-                                      snapshot.data!;
-                                  final rowWorkOrdersRow =
-                                      rowWorkOrdersRowList.isNotEmpty
-                                          ? rowWorkOrdersRowList.first
-                                          : null;
-                                  return Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: const NewEquipmentWidget(
-                                                    customerId: 0,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        text: 'Add Equipment',
-                                        options: FFButtonOptions(
-                                          height: 40.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 0.0, 24.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                      FlutterFlowDropDown<String>(
-                                        controller: _model
-                                                .dropDownValueController ??=
-                                            FormFieldController<String>(null),
-                                        options: const ['To Invoice', 'To Shop'],
-                                        onChanged: (val) => setState(
-                                            () => _model.dropDownValue = val),
-                                        width: 300.0,
-                                        height: 50.0,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                        hintText: 'Please select...',
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
-                                        ),
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        elevation: 2.0,
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .alternate,
-                                        borderWidth: 2.0,
-                                        borderRadius: 8.0,
-                                        margin: const EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 4.0, 16.0, 4.0),
-                                        hidesUnderline: true,
-                                        isOverButton: true,
-                                        isSearchable: false,
-                                        isMultiSelect: false,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 20.0, 20.0, 20.0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            await WorkOrdersTable().update(
-                                              data: {
-                                                'status': _model.dropDownValue,
-                                              },
-                                              matchingRows: (rows) => rows.eq(
-                                                'id',
-                                                widget.workOrder,
-                                              ),
-                                            );
-
-                                            context.pushNamed(
-                                                'workOrderListField');
-                                          },
-                                          text: ' Inspection Completed',
-                                          options: FFButtonOptions(
-                                            height: 40.0,
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    24.0, 0.0, 24.0, 0.0),
-                                            iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleMedium,
-                                            elevation: 3.0,
-                                            borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ],
+                              );
+                            },
                           ),
-                        );
-                      },
+                        ],
+                      ),
                     ),
                   ],
                 ),
