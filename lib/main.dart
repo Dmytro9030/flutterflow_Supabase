@@ -107,7 +107,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'workOrderListField': const WorkOrderListFieldWidget(),
       'customerList': const CustomerListWidget(),
-      'WOListShop': const WOListShopWidget(),
+      'workOrderListShop': const WorkOrderListShopWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -190,14 +190,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.fire_extinguisher,
+                  Icons.directions_car_outlined,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
                       : const Color(0x8A000000),
                   size: 24.0,
                 ),
                 Text(
-                  'Shop',
+                  'Field',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2

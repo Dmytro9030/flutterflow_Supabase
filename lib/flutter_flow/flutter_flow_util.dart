@@ -2,16 +2,20 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
 import 'package:from_css_color/from_css_color.dart';
 import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 import '../main.dart';
 
+import 'lat_lng.dart';
 
+export 'keep_alive_wrapper.dart';
 export 'lat_lng.dart';
 export 'place.dart';
 export 'uploaded_file.dart';
@@ -196,6 +200,34 @@ Color colorFromCssString(String color, {Color? defaultColor}) {
     return fromCssColor(color);
   } catch (_) {}
   return defaultColor ?? Colors.black;
+}
+
+Future launchMap({
+  MapType? mapType,
+  LatLng? location,
+  String? address,
+  required title,
+}) async {
+  final coords = location != null
+      ? Coords(location.latitude, location.longitude)
+      : Coords(0, 0);
+  final extraParams = address != null ? {'q': address} : null;
+  final noMap =
+      mapType == null || !(await MapLauncher.isMapAvailable(mapType) ?? false);
+  if (noMap) {
+    final installedMaps = await MapLauncher.installedMaps;
+    return installedMaps.first.showMarker(
+      coords: coords,
+      title: title,
+      extraParams: extraParams,
+    );
+  }
+  return MapLauncher.showMarker(
+    mapType: mapType,
+    coords: coords,
+    title: title,
+    extraParams: extraParams,
+  );
 }
 
 enum FormatType {
@@ -471,5 +503,24 @@ extension StatefulWidgetExtensions on State<StatefulWidget> {
       // ignore: invalid_use_of_protected_member
       setState(fn);
     }
+  }
+}
+
+// For iOS 16 and below, set the status bar color to match the app's theme.
+// https://github.com/flutter/flutter/issues/41067
+Brightness? _lastBrightness;
+void fixStatusBarOniOS16AndBelow(BuildContext context) {
+  if (!isiOS) {
+    return;
+  }
+  final brightness = Theme.of(context).brightness;
+  if (_lastBrightness != brightness) {
+    _lastBrightness = brightness;
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarBrightness: brightness,
+        systemStatusBarContrastEnforced: true,
+      ),
+    );
   }
 }

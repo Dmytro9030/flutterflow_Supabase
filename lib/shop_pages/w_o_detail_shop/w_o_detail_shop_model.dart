@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'w_o_detail_shop_widget.dart' show WODetailShopWidget;
@@ -7,22 +6,12 @@ import 'package:flutter/material.dart';
 class WODetailShopModel extends FlutterFlowModel<WODetailShopWidget> {
   ///  Local state fields for this page.
 
-  int eqptID = 13;
-
   String? visibleData;
-
-  dynamic customerDetail;
-
-  DateTime? startTime;
-
-  DateTime? endTime;
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // Stores action output result for [Backend Call - API (findCustomerInfo)] action in WODetailShop widget.
-  ApiCallResponse? apiResultCustomerDetail;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -31,9 +20,12 @@ class WODetailShopModel extends FlutterFlowModel<WODetailShopWidget> {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
-  var feSerial = '';
-  // Stores action output result for [Backend Call - API (findEqptID)] action in Button widget.
-  ApiCallResponse? apiResultEqpt;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode3;
+  TextEditingController? textController3;
+  String? Function(BuildContext, String?)? textController3Validator;
+  // State field(s) for showSwitch1 widget.
+  bool? showSwitch1Value;
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
@@ -51,6 +43,9 @@ class WODetailShopModel extends FlutterFlowModel<WODetailShopWidget> {
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
+
+    textFieldFocusNode3?.dispose();
+    textController3?.dispose();
   }
 
   /// Action blocks are added here.

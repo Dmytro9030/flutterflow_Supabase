@@ -57,10 +57,6 @@ class EquipmentRow extends SupabaseDataRow {
   set manufacturedDate(DateTime? value) =>
       setField<DateTime>('manufacturedDate', value);
 
-  int? get extinguisherCatalog => getField<int>('extinguisherCatalog');
-  set extinguisherCatalog(int? value) =>
-      setField<int>('extinguisherCatalog', value);
-
   String? get shopF => getField<String>('ShopF');
   set shopF(String? value) => setField<String>('ShopF', value);
 

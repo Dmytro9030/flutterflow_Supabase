@@ -38,16 +38,22 @@ class WorkOrderCheckListModel
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
+  // State field(s) for wo widget.
+  FocusNode? woFocusNode;
+  TextEditingController? woController;
+  String? Function(BuildContext, String?)? woControllerValidator;
   // State field(s) for userDD widget.
   String? userDDValue;
   FormFieldController<String>? userDDValueController;
   // Stores action output result for [Backend Call - API (findUserID)] action in userDD widget.
   ApiCallResponse? apiUsersResult;
+  // State field(s) for source widget.
+  String? sourceValue;
+  FormFieldController<String>? sourceValueController;
   DateTime? datePicked;
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue1;
   // State field(s) for SwitchListTile widget.
@@ -68,10 +74,10 @@ class WorkOrderCheckListModel
   bool? switchListTileValue9;
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue10;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for notes widget.
+  FocusNode? notesFocusNode;
+  TextEditingController? notesController;
+  String? Function(BuildContext, String?)? notesControllerValidator;
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   WorkOrdersRow? workOrderCreated;
   // Stores action output result for [Backend Call - API (findEquipmentOfType)] action in Button widget.
@@ -84,11 +90,11 @@ class WorkOrderCheckListModel
 
   @override
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    woFocusNode?.dispose();
+    woController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    notesFocusNode?.dispose();
+    notesController?.dispose();
   }
 
   /// Action blocks are added here.

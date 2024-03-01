@@ -118,19 +118,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'WOListShop',
-          path: '/wOListShop',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'WOListShop')
-              : const WOListShopWidget(),
-        ),
-        FFRoute(
           name: 'WODetailShop',
           path: '/wODetailShop',
           builder: (context, params) => WODetailShopWidget(
             workOrder: params.getParam('workOrder', ParamType.int),
             customerID: params.getParam('customerID', ParamType.int),
+            companyName: params.getParam('companyName', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'workOrderListShop',
+          path: '/workOrderListShop',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'workOrderListShop')
+              : const WorkOrderListShopWidget(),
+        ),
+        FFRoute(
+          name: 'workOrderDetailShop',
+          path: '/workOrderDetailShop',
+          builder: (context, params) => WorkOrderDetailShopWidget(
+            workOrder: params.getParam('workOrder', ParamType.int),
+            customerID: params.getParam('customerID', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'AuthPage',
+          path: '/authPage',
+          builder: (context, params) => const AuthPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -244,6 +258,7 @@ class FFRoute {
         name: name,
         path: path,
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(

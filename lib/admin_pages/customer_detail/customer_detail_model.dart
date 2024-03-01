@@ -1,8 +1,15 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'customer_detail_widget.dart' show CustomerDetailWidget;
 import 'package:flutter/material.dart';
 
 class CustomerDetailModel extends FlutterFlowModel<CustomerDetailWidget> {
+  ///  Local state fields for this page.
+
+  DateTime? nextInspectionDate;
+
+  DateTime? followUpDate;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -46,6 +53,11 @@ class CustomerDetailModel extends FlutterFlowModel<CustomerDetailWidget> {
   FocusNode? textFieldFocusNode10;
   TextEditingController? textController10;
   String? Function(BuildContext, String?)? textController10Validator;
+  // State field(s) for nextEqptDD widget.
+  String? nextEqptDDValue;
+  FormFieldController<String>? nextEqptDDValueController;
+  DateTime? datePicked1;
+  DateTime? datePicked2;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode11;
   TextEditingController? textController11;

@@ -1,24 +1,21 @@
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'customer_list_widget.dart' show CustomerListWidget;
+import 'find_extinguisher_widget.dart' show FindExtinguisherWidget;
 import 'package:flutter/material.dart';
 
-class CustomerListModel extends FlutterFlowModel<CustomerListWidget> {
-  ///  Local state fields for this page.
+class FindExtinguisherModel extends FlutterFlowModel<FindExtinguisherWidget> {
+  ///  Local state fields for this component.
 
-  bool isSearchOn = false;
+  String? visibleString;
 
-  String? searchData;
+  ///  State fields for stateful widgets in this component.
 
-  ///  State fields for stateful widgets in this page.
-
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
-  CustomersRow? newCustomer;
+  // Stores action output result for [Backend Call - Query Rows] action in Button widget.
+  List<EqptWoLisRow>? dataSetResult;
 
   /// Initialization and disposal methods.
 
@@ -27,7 +24,6 @@ class CustomerListModel extends FlutterFlowModel<CustomerListWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
   }

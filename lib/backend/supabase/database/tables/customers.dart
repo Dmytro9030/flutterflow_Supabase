@@ -165,4 +165,8 @@ class CustomersRow extends SupabaseDataRow {
 
   int? get primeContractor => getField<int>('primeContractor');
   set primeContractor(int? value) => setField<int>('primeContractor', value);
+
+  DateTime? get followUpDate => getField<DateTime>('followUpDate');
+  set followUpDate(DateTime? value) =>
+      setField<DateTime>('followUpDate', value);
 }

@@ -37,4 +37,7 @@ class EqptWoLisRow extends SupabaseDataRow {
 
   String? get details => getField<String>('details');
   set details(String? value) => setField<String>('details', value);
+
+  String? get photoUrl => getField<String>('photo_url');
+  set photoUrl(String? value) => setField<String>('photo_url', value);
 }

@@ -11,9 +11,11 @@ class ToShopPopupWidget extends StatefulWidget {
   const ToShopPopupWidget({
     super.key,
     required this.eqptWoLi,
+    required this.eqptID,
   });
 
   final int? eqptWoLi;
+  final int? eqptID;
 
   @override
   State<ToShopPopupWidget> createState() => _ToShopPopupWidgetState();
@@ -33,6 +35,9 @@ class _ToShopPopupWidgetState extends State<ToShopPopupWidget> {
     super.initState();
     _model = createModel(context, () => ToShopPopupModel());
 
+    _model.textController ??= TextEditingController(text: '0');
+    _model.textFieldFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -49,12 +54,12 @@ class _ToShopPopupWidgetState extends State<ToShopPopupWidget> {
 
     return Container(
       width: double.infinity,
-      height: 350.0,
+      height: double.infinity,
       constraints: const BoxConstraints(
         minWidth: 200.0,
         minHeight: 350.0,
         maxWidth: 350.0,
-        maxHeight: 350.0,
+        maxHeight: 450.0,
       ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -81,8 +86,53 @@ class _ToShopPopupWidgetState extends State<ToShopPopupWidget> {
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
               child: Text(
-                'Select  Shop Reason',
+                'Enter Loaner SN and Shop Reason',
+                textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).headlineSmall,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+              child: TextFormField(
+                controller: _model.textController,
+                focusNode: _model.textFieldFocusNode,
+                autofocus: true,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: 'Loaner SN',
+                  labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                  hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).alternate,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primary,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  errorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedErrorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium,
+                validator: _model.textControllerValidator.asValidator(context),
               ),
             ),
             FFButtonWidget(
@@ -96,6 +146,16 @@ class _ToShopPopupWidgetState extends State<ToShopPopupWidget> {
                     widget.eqptWoLi,
                   ),
                 );
+                await EquipmentTable().update(
+                  data: {
+                    'loaner_sn': _model.textController.text,
+                  },
+                  matchingRows: (rows) => rows.eq(
+                    'id',
+                    widget.eqptID,
+                  ),
+                );
+                context.safePop();
               },
               text: 'Recharge',
               options: FFButtonOptions(
@@ -125,6 +185,16 @@ class _ToShopPopupWidgetState extends State<ToShopPopupWidget> {
                       widget.eqptWoLi,
                     ),
                   );
+                  await EquipmentTable().update(
+                    data: {
+                      'loaner_sn': _model.textController.text,
+                    },
+                    matchingRows: (rows) => rows.eq(
+                      'id',
+                      widget.eqptID,
+                    ),
+                  );
+                  context.safePop();
                 },
                 text: 'Hydro',
                 options: FFButtonOptions(
@@ -156,6 +226,16 @@ class _ToShopPopupWidgetState extends State<ToShopPopupWidget> {
                       widget.eqptWoLi,
                     ),
                   );
+                  await EquipmentTable().update(
+                    data: {
+                      'loaner_sn': _model.textController.text,
+                    },
+                    matchingRows: (rows) => rows.eq(
+                      'id',
+                      widget.eqptID,
+                    ),
+                  );
+                  context.safePop();
                 },
                 text: 'Other',
                 options: FFButtonOptions(

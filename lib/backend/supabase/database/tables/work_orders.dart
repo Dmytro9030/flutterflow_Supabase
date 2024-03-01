@@ -57,4 +57,10 @@ class WorkOrdersRow extends SupabaseDataRow {
 
   bool? get estimateNeeded => getField<bool>('estimateNeeded');
   set estimateNeeded(bool? value) => setField<bool>('estimateNeeded', value);
+
+  String? get priority => getField<String>('priority');
+  set priority(String? value) => setField<String>('priority', value);
+
+  String? get source => getField<String>('source');
+  set source(String? value) => setField<String>('source', value);
 }

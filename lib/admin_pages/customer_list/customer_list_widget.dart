@@ -1,10 +1,10 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'customer_list_model.dart';
 export 'customer_list_model.dart';
@@ -41,15 +41,6 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -77,7 +68,6 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
-            primary: false,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -104,6 +94,22 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                   child: TextFormField(
                                     controller: _model.textController,
                                     focusNode: _model.textFieldFocusNode,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController',
+                                      const Duration(milliseconds: 2000),
+                                      () async {
+                                        setState(() {
+                                          _model.searchData =
+                                              _model.textController.text;
+                                        });
+                                      },
+                                    ),
+                                    onFieldSubmitted: (_) async {
+                                      setState(() {
+                                        _model.searchData =
+                                            _model.textController.text;
+                                      });
+                                    },
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Company',
@@ -168,6 +174,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     _model.isSearchOn = false;
+                                    _model.searchData = null;
                                     setState(() {
                                       _model.textController?.clear();
                                     });
@@ -185,18 +192,9 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    _model.apiResultetj =
-                                        await SearchCompaniesCall.call(
-                                      searchString: _model.textController.text,
-                                    );
-                                    if ((_model.apiResultetj?.succeeded ??
-                                        true)) {
-                                      setState(() {
-                                        _model.isSearchOn = true;
-                                      });
-                                    }
-
-                                    setState(() {});
+                                    setState(() {
+                                      _model.isSearchOn = true;
+                                    });
                                   },
                                   text: 'Search',
                                   options: FFButtonOptions(
@@ -236,6 +234,13 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                         ParamType.int,
                                       ),
                                     }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.rightToLeft,
+                                      ),
+                                    },
                                   );
 
                                   setState(() {});
@@ -269,47 +274,45 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                     ),
                   ],
                 ),
-                if (_model.isSearchOn == true)
-                  FutureBuilder<List<CustomersRow>>(
-                    future: CustomersTable().queryRows(
-                      queryFn: (q) => q
-                          .in_(
-                            'id',
-                            getJsonField(
-                              (_model.apiResultetj?.jsonBody ?? ''),
-                              r'''$[:].id''',
-                              true,
-                            )!,
-                          )
-                          .order('nextInspectionDate')
-                          .order('name', ascending: true),
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
+                FutureBuilder<List<CustomersRow>>(
+                  future: CustomersTable().queryRows(
+                    queryFn: (q) =>
+                        q.order('nextInspectionDate', ascending: true),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
                             ),
                           ),
-                        );
-                      }
-                      List<CustomersRow> listViewCustomersRowList =
-                          snapshot.data!;
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewCustomersRowList.length,
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewCustomersRow =
-                              listViewCustomersRowList[listViewIndex];
-                          return Padding(
+                        ),
+                      );
+                    }
+                    List<CustomersRow> listViewCustomersRowList =
+                        snapshot.data!;
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewCustomersRowList.length,
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewCustomersRow =
+                            listViewCustomersRowList[listViewIndex];
+                        return Visibility(
+                          visible: !_model.isSearchOn ||
+                              functions.subContainingFunc(
+                                  valueOrDefault<String>(
+                                    listViewCustomersRow.company,
+                                    'null',
+                                  ).toLowerCase(),
+                                  (_model.searchData!).toLowerCase()),
+                          child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -364,12 +367,47 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                             ),
                                           ),
                                           Text(
-                                            valueOrDefault<String>(
-                                              listViewCustomersRow
-                                                  .nextInspectionDate
-                                                  ?.toString(),
-                                              'blank',
-                                            ),
+                                            () {
+                                              if ((listViewCustomersRow
+                                                          .nextInspectionDate !=
+                                                      null) &&
+                                                  (listViewCustomersRow
+                                                          .followUpDate !=
+                                                      null)) {
+                                                return (listViewCustomersRow
+                                                            .nextInspectionDate!
+                                                            .secondsSinceEpoch <=
+                                                        listViewCustomersRow
+                                                            .followUpDate!
+                                                            .secondsSinceEpoch
+                                                    ? dateTimeFormat(
+                                                        'yMMMd',
+                                                        listViewCustomersRow
+                                                            .nextInspectionDate!)
+                                                    : dateTimeFormat(
+                                                        'yMMMd',
+                                                        listViewCustomersRow
+                                                            .followUpDate!));
+                                              } else if (listViewCustomersRow
+                                                      .nextInspectionDate ==
+                                                  null) {
+                                                return valueOrDefault<String>(
+                                                  dateTimeFormat(
+                                                      'yMMMd',
+                                                      listViewCustomersRow
+                                                          .followUpDate),
+                                                  'n/a',
+                                                );
+                                              } else {
+                                                return valueOrDefault<String>(
+                                                  dateTimeFormat(
+                                                      'yMMMd',
+                                                      listViewCustomersRow
+                                                          .nextInspectionDate),
+                                                  'n/a',
+                                                );
+                                              }
+                                            }(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyLarge,
                                           ),
@@ -434,173 +472,12 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                if (!_model.isSearchOn)
-                  FutureBuilder<List<CustomersRow>>(
-                    future: CustomersTable().queryRows(
-                      queryFn: (q) => q
-                          .order('nextInspectionDate')
-                          .order('name', ascending: true),
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
-                            ),
                           ),
                         );
-                      }
-                      List<CustomersRow> listViewCustomersRowList =
-                          snapshot.data!;
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewCustomersRowList.length,
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewCustomersRow =
-                              listViewCustomersRowList[listViewIndex];
-                          return Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(
-                                  'customerDetail',
-                                  queryParameters: {
-                                    'customerPageId': serializeParam(
-                                      listViewCustomersRow.id,
-                                      ParamType.int,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: const TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType:
-                                          PageTransitionType.rightToLeft,
-                                    ),
-                                  },
-                                );
-                              },
-                              child: Card(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                elevation: 4.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              valueOrDefault<String>(
-                                                listViewCustomersRow.name,
-                                                'CompanyName',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium,
-                                            ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              listViewCustomersRow
-                                                  .nextInspectionDate
-                                                  ?.toString(),
-                                              'blank',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              valueOrDefault<String>(
-                                                listViewCustomersRow.contact,
-                                                'Contact',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              listViewCustomersRow
-                                                  .nextEquipment,
-                                              'blank',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              valueOrDefault<String>(
-                                                listViewCustomersRow
-                                                    .serviceLocationAddress,
-                                                'Address',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                          ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              listViewCustomersRow.phone,
-                                              'phone',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                      },
+                    );
+                  },
+                ),
               ],
             ),
           ),

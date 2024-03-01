@@ -1,21 +1,21 @@
 import '../database.dart';
 
-class UsersTable extends SupabaseTable<UsersRow> {
+class AuthUsersTable extends SupabaseTable<AuthUsersRow> {
   @override
-  String get tableName => 'users';
+  String get tableName => 'auth_users';
 
   @override
-  UsersRow createRow(Map<String, dynamic> data) => UsersRow(data);
+  AuthUsersRow createRow(Map<String, dynamic> data) => AuthUsersRow(data);
 }
 
-class UsersRow extends SupabaseDataRow {
-  UsersRow(super.data);
+class AuthUsersRow extends SupabaseDataRow {
+  AuthUsersRow(super.data);
 
   @override
-  SupabaseTable get table => UsersTable();
+  SupabaseTable get table => AuthUsersTable();
 
-  int get id => getField<int>('id')!;
-  set id(int value) => setField<int>('id', value);
+  String get id => getField<String>('id')!;
+  set id(String value) => setField<String>('id', value);
 
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
@@ -28,7 +28,4 @@ class UsersRow extends SupabaseDataRow {
 
   String? get role => getField<String>('role');
   set role(String? value) => setField<String>('role', value);
-
-  String? get createdBy => getField<String>('created_by');
-  set createdBy(String? value) => setField<String>('created_by', value);
 }

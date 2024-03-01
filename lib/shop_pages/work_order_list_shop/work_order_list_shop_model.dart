@@ -1,11 +1,17 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'w_o_list_shop_widget.dart' show WOListShopWidget;
+import 'work_order_list_shop_widget.dart' show WorkOrderListShopWidget;
 import 'package:flutter/material.dart';
 
-class WOListShopModel extends FlutterFlowModel<WOListShopWidget> {
+class WorkOrderListShopModel extends FlutterFlowModel<WorkOrderListShopWidget> {
+  ///  Local state fields for this page.
+
+  int currentUser = -1;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for Switch widget.
+  bool? switchValue;
 
   /// Initialization and disposal methods.
 
