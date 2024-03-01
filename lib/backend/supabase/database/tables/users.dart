@@ -28,4 +28,7 @@ class UsersRow extends SupabaseDataRow {
 
   String? get role => getField<String>('role');
   set role(String? value) => setField<String>('role', value);
+
+  String? get createdBy => getField<String>('created_by');
+  set createdBy(String? value) => setField<String>('created_by', value);
 }

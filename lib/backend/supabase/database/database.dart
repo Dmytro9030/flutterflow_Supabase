@@ -5,7 +5,7 @@ export '../supabase.dart';
 export 'row.dart';
 export 'table.dart';
 
-export 'tables/extinguisher_catalog.dart';
+export 'tables/auth_users.dart';
 export 'tables/loaners.dart';
 export 'tables/comments.dart';
 export 'tables/item_lis.dart';

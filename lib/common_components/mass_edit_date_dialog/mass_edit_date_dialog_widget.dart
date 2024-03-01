@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -9,10 +10,12 @@ export 'mass_edit_date_dialog_model.dart';
 class MassEditDateDialogWidget extends StatefulWidget {
   const MassEditDateDialogWidget({
     super.key,
-    required this.dateField,
+    required this.eqptType,
+    required this.field,
   });
 
-  final String? dateField;
+  final String? eqptType;
+  final String? field;
 
   @override
   State<MassEditDateDialogWidget> createState() =>
@@ -55,6 +58,7 @@ class _MassEditDateDialogWidgetState extends State<MassEditDateDialogWidget> {
           width: double.infinity,
           constraints: const BoxConstraints(
             maxWidth: 530.0,
+            maxHeight: 200.0,
           ),
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -175,6 +179,47 @@ class _MassEditDateDialogWidgetState extends State<MassEditDateDialogWidget> {
                                 datePickedDate.day,
                               );
                             });
+                          }
+                          if (widget.field == 'inspectionDate1') {
+                            await EquipmentTable().update(
+                              data: {
+                                'inspectionDate1':
+                                    supaSerialize<DateTime>(_model.datePicked),
+                              },
+                              matchingRows: (rows) => rows.eq(
+                                'type',
+                                widget.eqptType,
+                              ),
+                            );
+                            Navigator.pop(context);
+                          } else {
+                            if (widget.field == 'inspectionDate2') {
+                              await EquipmentTable().update(
+                                data: {
+                                  'inspectionDate2': supaSerialize<DateTime>(
+                                      _model.datePicked),
+                                },
+                                matchingRows: (rows) => rows.eq(
+                                  'type',
+                                  widget.eqptType,
+                                ),
+                              );
+                              Navigator.pop(context);
+                            } else {
+                              if (widget.field == 'inspectionDate3') {
+                                await EquipmentTable().update(
+                                  data: {
+                                    'inspectionDate3': supaSerialize<DateTime>(
+                                        _model.datePicked),
+                                  },
+                                  matchingRows: (rows) => rows.eq(
+                                    'type',
+                                    widget.eqptType,
+                                  ),
+                                );
+                                Navigator.pop(context);
+                              }
+                            }
                           }
                         },
                         text: valueOrDefault<String>(

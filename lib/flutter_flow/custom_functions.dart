@@ -10,13 +10,6 @@ import 'place.dart';
 import 'uploaded_file.dart';
 import '/backend/supabase/supabase.dart';
 
-String formatDate(DateTime date) {
-  if (date == null) {
-    return '';
-  }
-  return DateFormat('MM/dd/yyyy').format(date);
-}
-
 bool existIDCheckFunc(dynamic response) {
   if (response.toString() == "[]") {
     return false;
@@ -34,7 +27,7 @@ List<int> getEqptIDFunction(List<EqptWoLisRow> eqptRow) {
   return result;
 }
 
-int getIDFunction(
+int geteqptWoLisIDFunction(
   List<EqptWoLisRow> eqptRow,
   int eqptID,
 ) {
@@ -42,14 +35,14 @@ int getIDFunction(
   eqptRow.asMap().forEach(
     (idx, value) {
       if (value.eqpt == eqptID) {
-        result = idx;
+        result = value.id;
       }
     },
   );
   return result;
 }
 
-bool containingFunction(
+bool subContainingFunc(
   String mainString,
   String subString,
 ) {
@@ -59,7 +52,22 @@ bool containingFunction(
   return false;
 }
 
-int getIndexOfcustomerFunction(
+String? geteqpWoListStateFunction(
+  List<EqptWoLisRow> eqptRow,
+  int eqptID,
+) {
+  String? result;
+  eqptRow.asMap().forEach(
+    (idx, value) {
+      if (value.eqpt == eqptID) {
+        result = value.status;
+      }
+    },
+  );
+  return result;
+}
+
+int getIndexOfCustomerFunc(
   List<CustomersRow> customerList,
   int id,
 ) {

@@ -1,8 +1,15 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'customer_detail_widget.dart' show CustomerDetailWidget;
 import 'package:flutter/material.dart';
 
 class CustomerDetailModel extends FlutterFlowModel<CustomerDetailWidget> {
+  ///  Local state fields for this page.
+
+  DateTime? nextInspectionDate;
+
+  DateTime? followUpDate;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -42,6 +49,19 @@ class CustomerDetailModel extends FlutterFlowModel<CustomerDetailWidget> {
   FocusNode? textFieldFocusNode9;
   TextEditingController? textController9;
   String? Function(BuildContext, String?)? textController9Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode10;
+  TextEditingController? textController10;
+  String? Function(BuildContext, String?)? textController10Validator;
+  // State field(s) for nextEqptDD widget.
+  String? nextEqptDDValue;
+  FormFieldController<String>? nextEqptDDValueController;
+  DateTime? datePicked1;
+  DateTime? datePicked2;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode11;
+  TextEditingController? textController11;
+  String? Function(BuildContext, String?)? textController11Validator;
 
   /// Initialization and disposal methods.
 
@@ -77,6 +97,12 @@ class CustomerDetailModel extends FlutterFlowModel<CustomerDetailWidget> {
 
     textFieldFocusNode9?.dispose();
     textController9?.dispose();
+
+    textFieldFocusNode10?.dispose();
+    textController10?.dispose();
+
+    textFieldFocusNode11?.dispose();
+    textController11?.dispose();
   }
 
   /// Action blocks are added here.

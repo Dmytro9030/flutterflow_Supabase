@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'work_order_check_list_widget.dart' show WorkOrderCheckListWidget;
 import 'package:flutter/material.dart';
 
@@ -32,14 +33,27 @@ class WorkOrderCheckListModel
 
   int loopCount2 = 0;
 
+  int? userID;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for wo widget.
+  FocusNode? woFocusNode;
+  TextEditingController? woController;
+  String? Function(BuildContext, String?)? woControllerValidator;
+  // State field(s) for userDD widget.
+  String? userDDValue;
+  FormFieldController<String>? userDDValueController;
+  // Stores action output result for [Backend Call - API (findUserID)] action in userDD widget.
+  ApiCallResponse? apiUsersResult;
+  // State field(s) for source widget.
+  String? sourceValue;
+  FormFieldController<String>? sourceValueController;
   DateTime? datePicked;
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue1;
   // State field(s) for SwitchListTile widget.
@@ -60,6 +74,10 @@ class WorkOrderCheckListModel
   bool? switchListTileValue9;
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue10;
+  // State field(s) for notes widget.
+  FocusNode? notesFocusNode;
+  TextEditingController? notesController;
+  String? Function(BuildContext, String?)? notesControllerValidator;
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   WorkOrdersRow? workOrderCreated;
   // Stores action output result for [Backend Call - API (findEquipmentOfType)] action in Button widget.
@@ -72,8 +90,11 @@ class WorkOrderCheckListModel
 
   @override
   void dispose() {
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    woFocusNode?.dispose();
+    woController?.dispose();
+
+    notesFocusNode?.dispose();
+    notesController?.dispose();
   }
 
   /// Action blocks are added here.

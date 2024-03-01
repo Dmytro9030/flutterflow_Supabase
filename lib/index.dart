@@ -12,4 +12,10 @@ export '/equipment_pages/list1/list1_widget.dart' show List1Widget;
 export '/equipment_pages/list2/list2_widget.dart' show List2Widget;
 export '/equipment_pages/list3/list3_widget.dart' show List3Widget;
 export '/equipment_pages/list4/list4_widget.dart' show List4Widget;
-export '/field_item_page/field_item_page_widget.dart' show FieldItemPageWidget;
+export '/shop_pages/w_o_detail_shop/w_o_detail_shop_widget.dart'
+    show WODetailShopWidget;
+export '/shop_pages/work_order_list_shop/work_order_list_shop_widget.dart'
+    show WorkOrderListShopWidget;
+export '/shop_pages/work_order_detail_shop/work_order_detail_shop_widget.dart'
+    show WorkOrderDetailShopWidget;
+export '/auth_page/auth_page_widget.dart' show AuthPageWidget;

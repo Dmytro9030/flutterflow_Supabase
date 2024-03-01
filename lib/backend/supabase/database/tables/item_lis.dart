@@ -32,9 +32,6 @@ class ItemLisRow extends SupabaseDataRow {
   int? get workOrder => getField<int>('workOrder');
   set workOrder(int? value) => setField<int>('workOrder', value);
 
-  int? get item => getField<int>('item');
-  set item(int? value) => setField<int>('item', value);
-
   int? get equipment => getField<int>('equipment');
   set equipment(int? value) => setField<int>('equipment', value);
 }
