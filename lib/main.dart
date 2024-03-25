@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+
+import 'auth/supabase_auth/supabase_user_provider.dart';
+import 'auth/supabase_auth/auth_util.dart';
+
 import '/backend/supabase/supabase.dart';
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -42,6 +46,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
+  late Stream<BaseAuthUser> userStream;
+
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
 
@@ -51,6 +57,13 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
+    userStream = serviceapp2SupabaseUserStream()
+      ..listen((user) => _appStateNotifier.update(user));
+    jwtTokenStream.listen((_) {});
+    Future.delayed(
+      const Duration(milliseconds: 1000),
+      () => _appStateNotifier.stopShowingSplashImage(),
+    );
   }
 
   void setThemeMode(ThemeMode mode) => setState(() {
@@ -70,9 +83,11 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(
         brightness: Brightness.light,
+        useMaterial3: false,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        useMaterial3: false,
       ),
       themeMode: _themeMode,
       routerConfig: _router,
@@ -108,6 +123,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'workOrderListField': const WorkOrderListFieldWidget(),
       'customerList': const CustomerListWidget(),
       'workOrderListShop': const WorkOrderListShopWidget(),
+      'WOListInvoicing': const WOListInvoicingWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -190,17 +206,41 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.directions_car_outlined,
+                  Icons.fire_extinguisher,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
                       : const Color(0x8A000000),
                   size: 24.0,
                 ),
                 Text(
-                  'Field',
+                  'Shop',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2
+                        ? FlutterFlowTheme.of(context).primary
+                        : const Color(0x8A000000),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.receipt,
+                  color: currentIndex == 3
+                      ? FlutterFlowTheme.of(context).primary
+                      : const Color(0x8A000000),
+                  size: 24.0,
+                ),
+                Text(
+                  'Invoicing',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 3
                         ? FlutterFlowTheme.of(context).primary
                         : const Color(0x8A000000),
                     fontSize: 11.0,

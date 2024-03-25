@@ -40,4 +40,10 @@ class EqptWoLisRow extends SupabaseDataRow {
 
   String? get photoUrl => getField<String>('photo_url');
   set photoUrl(String? value) => setField<String>('photo_url', value);
+
+  String? get statusNotes => getField<String>('status_notes');
+  set statusNotes(String? value) => setField<String>('status_notes', value);
+
+  DateTime? get created => getField<DateTime>('created');
+  set created(DateTime? value) => setField<DateTime>('created', value);
 }

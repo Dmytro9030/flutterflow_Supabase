@@ -63,4 +63,30 @@ class WorkOrdersRow extends SupabaseDataRow {
 
   String? get source => getField<String>('source');
   set source(String? value) => setField<String>('source', value);
+
+  String? get statusNotes => getField<String>('status_notes');
+  set statusNotes(String? value) => setField<String>('status_notes', value);
+
+  String? get subtype => getField<String>('subtype');
+  set subtype(String? value) => setField<String>('subtype', value);
+
+  DateTime? get dateInvoiced => getField<DateTime>('date_invoiced');
+  set dateInvoiced(DateTime? value) =>
+      setField<DateTime>('date_invoiced', value);
+
+  DateTime? get followUpDate => getField<DateTime>('follow_up_date');
+  set followUpDate(DateTime? value) =>
+      setField<DateTime>('follow_up_date', value);
+
+  int? get comment => getField<int>('comment');
+  set comment(int? value) => setField<int>('comment', value);
+
+  double? get invoiceAmt => getField<double>('invoice_amt');
+  set invoiceAmt(double? value) => setField<double>('invoice_amt', value);
+
+  String? get invoiceLink => getField<String>('invoice_link');
+  set invoiceLink(String? value) => setField<String>('invoice_link', value);
+
+  DateTime? get datePaid => getField<DateTime>('date_paid');
+  set datePaid(DateTime? value) => setField<DateTime>('date_paid', value);
 }

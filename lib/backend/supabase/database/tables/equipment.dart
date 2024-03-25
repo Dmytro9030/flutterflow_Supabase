@@ -53,21 +53,11 @@ class EquipmentRow extends SupabaseDataRow {
   String? get frequency3 => getField<String>('frequency3');
   set frequency3(String? value) => setField<String>('frequency3', value);
 
-  DateTime? get manufacturedDate => getField<DateTime>('manufacturedDate');
-  set manufacturedDate(DateTime? value) =>
-      setField<DateTime>('manufacturedDate', value);
-
   String? get shopF => getField<String>('ShopF');
   set shopF(String? value) => setField<String>('ShopF', value);
 
   DateTime? get nextDue1 => getField<DateTime>('nextDue1');
   set nextDue1(DateTime? value) => setField<DateTime>('nextDue1', value);
-
-  DateTime? get nextDue2 => getField<DateTime>('nextDue2');
-  set nextDue2(DateTime? value) => setField<DateTime>('nextDue2', value);
-
-  DateTime? get nextDue3 => getField<DateTime>('nextDue3');
-  set nextDue3(DateTime? value) => setField<DateTime>('nextDue3', value);
 
   DateTime? get soonestDate => getField<DateTime>('soonestDate');
   set soonestDate(DateTime? value) => setField<DateTime>('soonestDate', value);
@@ -98,4 +88,16 @@ class EquipmentRow extends SupabaseDataRow {
 
   String? get photoUrl => getField<String>('photo_url');
   set photoUrl(String? value) => setField<String>('photo_url', value);
+
+  String? get details2 => getField<String>('details2');
+  set details2(String? value) => setField<String>('details2', value);
+
+  int? get nextDue2 => getField<int>('nextDue2');
+  set nextDue2(int? value) => setField<int>('nextDue2', value);
+
+  int? get nextDue3 => getField<int>('nextDue3');
+  set nextDue3(int? value) => setField<int>('nextDue3', value);
+
+  int? get manufacturedDate => getField<int>('manufacturedDate');
+  set manufacturedDate(int? value) => setField<int>('manufacturedDate', value);
 }

@@ -31,4 +31,10 @@ class CommentsRow extends SupabaseDataRow {
 
   String? get status => getField<String>('status');
   set status(String? value) => setField<String>('status', value);
+
+  String? get creator => getField<String>('creator');
+  set creator(String? value) => setField<String>('creator', value);
+
+  int? get workOrder => getField<int>('work_order');
+  set workOrder(int? value) => setField<int>('work_order', value);
 }
