@@ -9,6 +9,7 @@ import 'lat_lng.dart';
 import 'place.dart';
 import 'uploaded_file.dart';
 import '/backend/supabase/supabase.dart';
+import '/auth/supabase_auth/auth_util.dart';
 
 bool existIDCheckFunc(dynamic response) {
   if (response.toString() == "[]") {
@@ -78,4 +79,20 @@ int getIndexOfCustomerFunc(
     }
   });
   return result;
+}
+
+int? nextDueDateFunction(int frequency) {
+  DateTime currentTime = DateTime.now();
+  return currentTime.year + frequency;
+}
+
+bool isSupabaseListEmpty(List<EqptWoLisRow> sbList) {
+  return sbList.isEmpty ? false : true;
+}
+
+int getYear(
+  DateTime date,
+  int frequency,
+) {
+  return date.year + frequency;
 }

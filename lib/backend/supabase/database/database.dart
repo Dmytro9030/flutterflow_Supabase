@@ -6,7 +6,9 @@ export 'row.dart';
 export 'table.dart';
 
 export 'tables/auth_users.dart';
+export 'tables/requests.dart';
 export 'tables/loaners.dart';
+export 'tables/hydro_log.dart';
 export 'tables/comments.dart';
 export 'tables/item_lis.dart';
 export 'tables/item_catalog.dart';

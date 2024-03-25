@@ -169,4 +169,11 @@ class CustomersRow extends SupabaseDataRow {
   DateTime? get followUpDate => getField<DateTime>('followUpDate');
   set followUpDate(DateTime? value) =>
       setField<DateTime>('followUpDate', value);
+
+  DateTime? get higherffupdate => getField<DateTime>('higherffupdate');
+  set higherffupdate(DateTime? value) =>
+      setField<DateTime>('higherffupdate', value);
+
+  String? get shoporfield => getField<String>('shoporfield');
+  set shoporfield(String? value) => setField<String>('shoporfield', value);
 }

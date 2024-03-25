@@ -11,4 +11,4 @@ PRODUCT_NAME = serviceapp2
 PRODUCT_BUNDLE_IDENTIFIER = com.safeblu.serviceapp
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 serviceapp2. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 serviceapp2. All rights reserved.
